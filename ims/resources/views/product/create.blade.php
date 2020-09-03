@@ -12,7 +12,7 @@
   </head>
   <body>
   	<div class="container">
-      @if($product)
+      @if(isset($product))
         <h1>Edit Product</h1>
       @else
         <h1>Add Product</h1>
@@ -48,7 +48,7 @@
             <label for="Description">Description</label>
             <textarea class="form-control" rows="5" cols="5" name="description" id="description" placeholder="Description">{{ isset($product) ? $product->product_description : '' }}</textarea>
           </div>
-          @if($product)
+          @if(isset($product))
           <div class="form-group">
             <img src="{{ asset('storage/'.$product->logo) }}" alt="product" width="100" height="100">
           </div>
@@ -58,7 +58,7 @@
             <input type="file" name="image" id="image" class="form-control">
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-success">@if($product) Update @else Add @endif</button>
+            <button type="submit" class="btn btn-success">@if(isset($product)) Update @else Add @endif</button>
           </div>
 
         </form>

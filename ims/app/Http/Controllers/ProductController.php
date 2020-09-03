@@ -62,9 +62,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Products $product)
     {
-        //
+        return view('product.show')->with('product', $product);
     }
 
     /**
@@ -85,9 +85,24 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Products $product)
     {
-        dd($id);
+        $this->validate($request,[
+            'product_name' => 'required',
+            'product_code' => 'required || min:4'
+        ]);
+
+        $data = $request->only('product_name', 'product_code','product_description');
+        if($request->hasFile('image')){
+            $image = $request->image->store('products');
+            //$product->deleteImage();
+
+            $data['logo'] = $image;
+        }
+
+        $product->update($data);
+
+        return redirect(route('products.index'));
     }
 
     /**

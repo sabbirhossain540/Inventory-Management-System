@@ -32,7 +32,7 @@
               <td>{{ $product->product_name }}</td>
               <td>{{ $product->product_code }}</td>
               <td><img src="{{ asset('storage/'.$product->logo) }}" alt="product" width="60" height="60"></td>
-              <td><a href="" class="btn btn-sm btn-info mr-1">View</a><a href="{{ route('products.edit',$product->id) }}" class="btn btn-sm btn-warning mr-1">Edit</a><a href="" class="btn btn-sm btn-danger">Delete</a></td>
+              <td><a href="{{ route('products.show',$product->id) }}" class="btn btn-sm btn-info mr-1">View</a><a href="{{ route('products.edit',$product->id) }}" class="btn btn-sm btn-warning mr-1">Edit</a><a href="" class="btn btn-sm btn-danger">Delete</a></td>
             </tr>
           @endforeach
         </tbody>

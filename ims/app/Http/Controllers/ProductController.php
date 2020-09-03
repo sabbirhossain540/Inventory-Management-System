@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use App\Products;
 
 class ProductController extends Controller
 {
@@ -13,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('product.index');
+        return view('product.index')->with('products', Products::all());
     }
 
     /**
@@ -40,7 +42,18 @@ class ProductController extends Controller
             'image' => 'required',
         ]);
 
-        
+        $image = $request->image->store('products');
+
+        Products::create([
+            'product_name' => $request->product_name,
+            'product_code' => $request->product_code,
+            'product_description' => $request->description,
+            'logo' => $image
+        ]);
+
+        return redirect(route('products.index'));
+
+
     }
 
     /**

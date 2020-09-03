@@ -73,9 +73,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Products $product)
     {
-        //
+        return view('product.create')->with('product', $product);
     }
 
     /**
@@ -87,7 +87,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd($id);
     }
 
     /**

@@ -18,7 +18,7 @@
       <table class="table table-bordered mt-3">
         <thead>
           <tr>
-            <th scope="col">#</th>
+            <!-- <th scope="col">#</th> -->
             <th scope="col">Name</th>
             <th scope="col">Code</th>
             <th scope="col">Logo</th>
@@ -26,13 +26,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-          </tr>
+          @foreach($products as $product)
+            <tr>
+              <!-- <th scope="row">1</th> -->
+              <td>{{ $product->product_name }}</td>
+              <td>{{ $product->product_code }}</td>
+              <td><img src="{{ asset('storage/'.$product->logo) }}" alt="product" width="60" height="60"></td>
+              <td><a href="" class="btn btn-sm btn-info mr-1">View</a><a href="{{ route('products.edit',$product->id) }}" class="btn btn-sm btn-warning mr-1">Edit</a><a href="" class="btn btn-sm btn-danger">Delete</a></td>
+            </tr>
+          @endforeach
         </tbody>
       </table>
 

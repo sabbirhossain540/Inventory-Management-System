@@ -2013,10 +2013,6 @@ module.exports = {
 //
 //
 //
-//
-//
-//
-//
 
 /***/ }),
 
@@ -37786,27 +37782,15 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("form", [
       _c("div", { staticClass: "form-group" }, [
-        _c("label", [_vm._v("First Name")]),
+        _c("label", [_vm._v("Fullname")]),
         _vm._v(" "),
         _c("input", {
           staticClass: "form-control",
           attrs: {
             type: "text",
-            id: "exampleInputFirstName",
+            name: "name",
+            id: "name",
             placeholder: "Enter First Name"
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", [_vm._v("Last Name")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "text",
-            id: "exampleInputLastName",
-            placeholder: "Enter Last Name"
           }
         })
       ]),
@@ -37818,7 +37802,8 @@ var staticRenderFns = [
           staticClass: "form-control",
           attrs: {
             type: "email",
-            id: "exampleInputEmail",
+            id: "email",
+            name: "email",
             "aria-describedby": "emailHelp",
             placeholder: "Enter Email Address"
           }
@@ -37832,7 +37817,8 @@ var staticRenderFns = [
           staticClass: "form-control",
           attrs: {
             type: "password",
-            id: "exampleInputPassword",
+            id: "password",
+            name: "password",
             placeholder: "Password"
           }
         })
@@ -37845,7 +37831,8 @@ var staticRenderFns = [
           staticClass: "form-control",
           attrs: {
             type: "password",
-            id: "exampleInputPasswordRepeat",
+            id: "confirmPassword",
+            name: "confirmPassword",
             placeholder: "Repeat Password"
           }
         })

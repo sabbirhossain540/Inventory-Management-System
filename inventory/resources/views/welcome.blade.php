@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <link href="{{ asset('backend/img/logo/logo.png') }}" rel="icon">
-  <title>RuangAdmin - Dashboard</title>
+  <title>Admin Panel - Dashboard</title>
 
   <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
 
@@ -124,7 +124,7 @@
       <!-- Sidebar -->
 
 
-      
+
       <div id="content-wrapper" class="d-flex flex-column">
         <div id="content">
           <!-- TopBar -->

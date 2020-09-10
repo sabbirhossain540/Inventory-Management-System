@@ -1953,6 +1953,7 @@ module.exports = {
 //
 //
 //
+//
 
 /***/ }),
 
@@ -1963,6 +1964,8 @@ module.exports = {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+//
+//
 //
 //
 //
@@ -37598,38 +37601,35 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container-login" }, [
+  return _c("div", [
     _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "card my-5" }, [
-        _c("div", { staticClass: "card-body p-0" }, [
-          _c("div", { staticClass: "login-form" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _vm._m(1),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "text-center" },
-              [
-                _c("router-link", { attrs: { to: "/register" } }, [
-                  _vm._v("Create an Account!")
+      _c("div", { staticClass: "col-xl-10 col-lg-12 col-md-9" }, [
+        _c("div", { staticClass: "card shadow-sm my-5" }, [
+          _c("div", { staticClass: "card-body p-0" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-lg-12" }, [
+                _c("div", { staticClass: "login-form" }, [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-center" },
+                    [
+                      _c("router-link", { attrs: { to: "/register" } }, [
+                        _vm._v("Create an Account!")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "text-center" })
                 ])
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "text-center" },
-              [
-                _c("router-link", { attrs: { to: "/" } }, [
-                  _vm._v("Forgate Password")
-                ])
-              ],
-              1
-            )
+              ])
+            ])
           ])
         ])
       ])
@@ -37655,7 +37655,8 @@ var staticRenderFns = [
           staticClass: "form-control",
           attrs: {
             type: "email",
-            id: "exampleInputEmail",
+            id: "email",
+            name: "email",
             "aria-describedby": "emailHelp",
             placeholder: "Enter Email Address"
           }
@@ -37667,7 +37668,8 @@ var staticRenderFns = [
           staticClass: "form-control",
           attrs: {
             type: "password",
-            id: "exampleInputPassword",
+            id: "password",
+            name: "password",
             placeholder: "Password"
           }
         })
@@ -37692,7 +37694,7 @@ var staticRenderFns = [
                 staticClass: "custom-control-label",
                 attrs: { for: "customCheck" }
               },
-              [_vm._v("Remember\n                          Me")]
+              [_vm._v("Remember\n\t                          Me")]
             )
           ]
         )
@@ -37707,9 +37709,7 @@ var staticRenderFns = [
           },
           [_vm._v("Login")]
         )
-      ]),
-      _vm._v(" "),
-      _c("hr")
+      ])
     ])
   }
 ]
@@ -37734,31 +37734,33 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container-login" }, [
+  return _c("div", [
     _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "card shadow-sm my-5" }, [
-        _c("div", { staticClass: "card-body p-0" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-lg-12" }, [
-              _c("div", { staticClass: "login-form" }, [
-                _vm._m(0),
-                _vm._v(" "),
-                _vm._m(1),
-                _vm._v(" "),
-                _c("hr"),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "text-center" },
-                  [
-                    _c("router-link", { attrs: { to: "/" } }, [
-                      _vm._v("Already have an account?")
-                    ])
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "text-center" })
+      _c("div", { staticClass: "col-xl-10 col-lg-12 col-md-9" }, [
+        _c("div", { staticClass: "card shadow-sm my-5" }, [
+          _c("div", { staticClass: "card-body p-0" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-lg-12" }, [
+                _c("div", { staticClass: "login-form" }, [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-center" },
+                    [
+                      _c("router-link", { attrs: { to: "/" } }, [
+                        _vm._v("Already have an account?")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "text-center" })
+                ])
               ])
             ])
           ])
@@ -37788,9 +37790,9 @@ var staticRenderFns = [
           staticClass: "form-control",
           attrs: {
             type: "text",
-            name: "name",
             id: "name",
-            placeholder: "Enter First Name"
+            name: "name",
+            placeholder: "Enter Fullname"
           }
         })
       ]),
@@ -37831,8 +37833,8 @@ var staticRenderFns = [
           staticClass: "form-control",
           attrs: {
             type: "password",
-            id: "confirmPassword",
-            name: "confirmPassword",
+            id: "password_confirmation",
+            name: "password_confirmation",
             placeholder: "Repeat Password"
           }
         })

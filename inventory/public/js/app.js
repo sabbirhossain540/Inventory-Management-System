@@ -53371,7 +53371,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]); //Router Import
 
- //Import User Class
+ //Import User Class globally
 
 
 window.User = _Helpers_User__WEBPACK_IMPORTED_MODULE_3__["default"];

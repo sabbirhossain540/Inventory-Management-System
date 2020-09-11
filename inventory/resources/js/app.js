@@ -10,7 +10,7 @@ Vue.use(VueRouter)
 import {routes} from './routes'
 
 
-//Import User Class
+//Import User Class globally
 import User from './Helpers/User'
 window.User = User
 

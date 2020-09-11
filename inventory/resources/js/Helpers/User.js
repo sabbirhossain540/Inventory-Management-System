@@ -8,6 +8,7 @@ class User{
 		const username = res.data.name
 
 		if(Token.isValid(access_token)){
+
 			AppStorage.store(access_token, username)
 		}
 	}

@@ -1,3 +1,5 @@
+
+//Store all info into local Storage
 class AppStorage{
 	storeToken(token){
 		localStorage.setItem('token',token);

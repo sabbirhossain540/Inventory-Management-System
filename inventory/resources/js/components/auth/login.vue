@@ -48,6 +48,14 @@
 
 <script>
 	export default {
+		//Using Hook method as like construction method
+		//User.loggedIn() Method comes from User Helper Class
+		created(){
+			if(User.loggedIn()){
+				this.$router.push({name: 'home'})
+			}
+		},
+
 		data(){
 			return {
 				form:{

@@ -70,9 +70,24 @@
 				 axios.post('/api/auth/login',this.form)
 				 .then(res => {
 				 	User.responseAfterLogin(res)
+
+				 	//Using Sweet Alert
+				 	Toast.fire({
+					  icon: 'success',
+					  title: 'Signed in successfully'
+					})
+
 				 	this.$router.push({name: 'home'})
 				 })
-				 .catch(error => console.log(error.response.data))
+				 .catch(//error => console.log(error.response.data)
+				 	error => this.errors = error.response.data.errors
+				 	)
+				 .catch(
+				 		Toast.fire({
+						  icon: 'warning',
+						  title: 'Invalid Username and Password'
+						})
+				 	)
 			}
 		}
 	}

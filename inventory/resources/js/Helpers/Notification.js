@@ -4,7 +4,7 @@ class Notification{
 	success(){
 		new Noty({
 		    type: 'success',
-		    layout : 'topRight'
+		    layout : 'topRight',
 		    text: 'Successfully Done',
 		    timeout: 1000,
 		}).show();
@@ -14,7 +14,7 @@ class Notification{
 	alert(){
 		new Noty({
 		    type: 'alert',
-		    layout : 'topRight'
+		    layout : 'topRight',
 		    text: 'Are you sure?',
 		    timeout: 1000,
 		}).show();
@@ -23,7 +23,7 @@ class Notification{
 	error(){
 		new Noty({
 		    type: 'alert',
-		    layout : 'topRight'
+		    layout : 'topRight',
 		    text: 'Something Went Wrong',
 		    timeout: 1000,
 		}).show();
@@ -33,7 +33,7 @@ class Notification{
 	warning(){
 		new Noty({
 		    type: 'warning',
-		    layout : 'topRight'
+		    layout : 'topRight',
 		    text: 'Oop! Wrong Something',
 		    timeout: 1000,
 		}).show();

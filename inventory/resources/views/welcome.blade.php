@@ -24,7 +24,7 @@
     <div id="wrapper">
       <!-- Sidebar -->
 
-      <nav id="sidebar" v-show="$route.path === '/' || $route.path === '/signup' ? false : true " >
+      <nav id="sidebar" v-show="$route.path === '/' || $route.path === '/register' ? false : true " >
         <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
           <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
             <div class="sidebar-brand-icon">
@@ -130,7 +130,7 @@
       <div id="content-wrapper" class="d-flex flex-column">
         <div id="content">
           <!-- TopBar -->
-          <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top" id="topbar" v-show="$route.path === '/' || $route.path === '/signup' ? false : true ">
+          <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top" id="topbar" v-show="$route.path === '/' || $route.path === '/register' ? false : true ">
             <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
               <i class="fa fa-bars"></i>
             </button>

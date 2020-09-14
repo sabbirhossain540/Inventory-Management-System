@@ -51,7 +51,7 @@
             <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
               <div class="bg-white py-2 collapse-inner rounded">
                 <router-link class="collapse-item" to="/store-employee">Add Employee</router-link>
-                <router-link class="collapse-item" to="">All Employee</router-link>
+                <router-link class="collapse-item" to="/allemployee">All Employee</router-link>
               </div>
             </div>
           </li>

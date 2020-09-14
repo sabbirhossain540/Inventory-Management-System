@@ -1,6 +1,6 @@
 <template>
 	    <div>
-	    	<div class="row">
+	    	<div class="row mx-1">
 	    		<router-link to="/allemployee" class="btn btn-primary">All Employee</router-link>
 	    	</div>
 		    <div class="row justify-content-center">

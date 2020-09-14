@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use app\Model\Employee;
+use App\Model\Employee;
 
 class EmployeeController extends Controller
 {
@@ -37,7 +37,26 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'name' => 'required|unique:employees|max:255',
+            'email' => 'required',
+            'phone' => 'required | unique:employees'
+        ]);
+
+        if($request->photo){
+            $position = strpos($request->photo, ';');
+            $sub = substr($request->photo, 0, $position);
+            $ext = explode('/', $sub)[1];
+
+            $name = time().".".$ext;
+            $img = Image::make($request->photo)->resize(240,200); //Use for Image Resize from image intervation
+            $upload_path = 'backend/employee/';
+            $image_url = $upload_path.$name;
+            echo $image_url;exit();
+            $img->save($image_url);
+
+            
+        }
     }
 
     /**

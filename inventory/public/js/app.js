@@ -2639,7 +2639,9 @@ __webpack_require__.r(__webpack_exports__);
         });
 
         Notification.success();
-      })["catch"]();
+      })["catch"](function (error) {
+        return _this.errors = error.response.data.errors;
+      });
     },
     onFileSelected: function onFileSelected(event) {
       var _this2 = this;

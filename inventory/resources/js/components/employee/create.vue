@@ -131,7 +131,7 @@
 					this.$router.push({ name: 'employee'})
 					Notification.success();
 				})
-				.catch()
+				.catch(error => this.errors = error.response.data.errors)
 			},
 
 			onFileSelected(event){

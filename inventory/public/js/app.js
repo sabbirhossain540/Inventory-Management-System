@@ -2635,7 +2635,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post('/api/employee/', this.form).then(function () {
         _this.$router.push({
-          name: 'employee'
+          name: 'allemployee'
         });
 
         Notification.success();

@@ -128,7 +128,7 @@
 			employeeInsert(){
 				axios.post('/api/employee/',this.form)
 				.then(() => {
-					this.$router.push({ name: 'employee'})
+					this.$router.push({ name: 'allemployee'})
 					Notification.success();
 				})
 				.catch(error => this.errors = error.response.data.errors)

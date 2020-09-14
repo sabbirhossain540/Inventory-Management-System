@@ -72,7 +72,7 @@
 		                    		</div>
 
 		                    		<div class="col-md-6">
-		                    			<img src="form.photo" height="40px" width="40px">
+		                    			<img :src="form.photo" height="40px" width="40px">
 		                    		</div>
 		                    	</div>   
 		                    </div>
@@ -126,7 +126,12 @@
 
 		methods:{
 			employeeInsert(){
-				alert("ok");
+				axios.post('/api/employee/',this.form)
+				.then(() => {
+					this.$router.push({ name: 'employee'})
+					Notification.success();
+				})
+				.catch()
 			},
 
 			onFileSelected(event){
@@ -134,11 +139,13 @@
 				if(file.size > 1048770){
 					Notification.image_validation();
 				}else{
+					//For Instant Image Show
 					let reader = new FileReader();
 					reader.onload = event =>{
 						this.form.photo = event.target.result
+						console.log(event.target.result);
 					};
-					reader.readAsDataURL(file);
+					reader.readAsDataURL(file)
 				}
 			}
 		}

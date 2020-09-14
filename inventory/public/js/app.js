@@ -2631,20 +2631,30 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     employeeInsert: function employeeInsert() {
-      alert("ok");
+      var _this = this;
+
+      axios.post('/api/employee/', this.form).then(function () {
+        _this.$router.push({
+          name: 'employee'
+        });
+
+        Notification.success();
+      })["catch"]();
     },
     onFileSelected: function onFileSelected(event) {
-      var _this = this;
+      var _this2 = this;
 
       var file = event.target.files[0];
 
       if (file.size > 1048770) {
         Notification.image_validation();
       } else {
+        //For Instant Image Show
         var reader = new FileReader();
 
         reader.onload = function (event) {
-          _this.form.photo = event.target.result;
+          _this2.form.photo = event.target.result;
+          console.log(event.target.result);
         };
 
         reader.readAsDataURL(file);
@@ -46424,11 +46434,19 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _vm._m(1)
+                          _c("div", { staticClass: "col-md-6" }, [
+                            _c("img", {
+                              attrs: {
+                                src: _vm.form.photo,
+                                height: "40px",
+                                width: "40px"
+                              }
+                            })
+                          ])
                         ])
                       ]),
                       _vm._v(" "),
-                      _vm._m(2)
+                      _vm._m(1)
                     ]
                   ),
                   _vm._v(" "),
@@ -46451,14 +46469,6 @@ var staticRenderFns = [
       _c("h1", { staticClass: "h4 text-gray-900 mb-4" }, [
         _vm._v("Add Employee")
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-6" }, [
-      _c("img", { attrs: { src: "form.photo", height: "40px", width: "40px" } })
     ])
   },
   function() {

@@ -2643,6 +2643,7 @@ __webpack_require__.r(__webpack_exports__);
         return _this.errors = error.response.data.errors;
       });
     },
+    //For Image Size Check Function
     onFileSelected: function onFileSelected(event) {
       var _this2 = this;
 

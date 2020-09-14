@@ -134,6 +134,7 @@
 				.catch(error => this.errors = error.response.data.errors)
 			},
 
+			//For Image Size Check Function
 			onFileSelected(event){
 				let file = event.target.files[0];
 				if(file.size > 1048770){

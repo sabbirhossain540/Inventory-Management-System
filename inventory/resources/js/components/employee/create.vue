@@ -134,7 +134,11 @@
 				if(file.size > 1048770){
 					Notification.image_validation();
 				}else{
-					console.log("error");
+					let reader = new FileReader();
+					reader.onload = event =>{
+						this.form.photo = event.target.result
+					};
+					reader.readAsDataURL(file);
 				}
 			}
 		}

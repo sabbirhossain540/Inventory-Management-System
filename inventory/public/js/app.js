@@ -2634,12 +2634,20 @@ __webpack_require__.r(__webpack_exports__);
       alert("ok");
     },
     onFileSelected: function onFileSelected(event) {
+      var _this = this;
+
       var file = event.target.files[0];
 
       if (file.size > 1048770) {
         Notification.image_validation();
       } else {
-        console.log("error");
+        var reader = new FileReader();
+
+        reader.onload = function (event) {
+          _this.form.photo = event.target.result;
+        };
+
+        reader.readAsDataURL(file);
       }
     }
   }

@@ -2632,6 +2632,15 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     employeeInsert: function employeeInsert() {
       alert("ok");
+    },
+    onFileSelected: function onFileSelected(event) {
+      var file = event.target.files[0];
+
+      if (file.size > 1048770) {
+        Notification.image_validation();
+      } else {
+        console.log("error");
+      }
     }
   }
 });
@@ -46387,7 +46396,8 @@ var render = function() {
                           _c("div", { staticClass: "col-md-6" }, [
                             _c("input", {
                               staticClass: "custom-file-input",
-                              attrs: { type: "file", id: "customeFile" }
+                              attrs: { type: "file", id: "customeFile" },
+                              on: { change: _vm.onFileSelected }
                             }),
                             _vm._v(" "),
                             _vm.errors.photo
@@ -61876,6 +61886,16 @@ var Notification = /*#__PURE__*/function () {
         type: 'warning',
         layout: 'topRight',
         text: 'Oop! Wrong Something',
+        timeout: 1000
+      }).show();
+    }
+  }, {
+    key: "image_validation",
+    value: function image_validation() {
+      new Noty({
+        type: 'error',
+        layout: 'topRight',
+        text: 'Upload Image Less than 1 MB Size',
         timeout: 1000
       }).show();
     }

@@ -52,7 +52,7 @@ class SupplierController extends Controller
             $supplier->email = $request->email;
             $supplier->address = $request->address;
             $supplier->phone = $request->phone;
-            $employee->photo = $image_url;
+            $supplier->photo = $image_url;
             $supplier->shopname = $request->shopname;
             $supplier->save();
         }else{

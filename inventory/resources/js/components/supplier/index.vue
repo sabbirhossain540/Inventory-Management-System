@@ -1,7 +1,7 @@
 <template>
 	    <div>
 	    	<div class="row mx-1">
-	    		<router-link to="/store-employee" class="btn btn-primary mb-3">Add Employee</router-link>
+	    		<router-link to="/store-supplier" class="btn btn-primary mb-3">Add Supplier</router-link>
 	    	</div>
 	    	<br>
 
@@ -13,7 +13,7 @@
               <!-- Simple Tables -->
               <div class="card">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Employee List</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Supplier List</h6>
                 </div>
                 <div class="table-responsive">
                   <table class="table align-items-center table-flush">
@@ -22,18 +22,16 @@
                         <th>Name</th>
                         <th>Photo</th>
                         <th>Phone</th>
-                        <th>Sallery</th>
-                        <th>Joining Date</th>
+                        <th>Address</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="employee in filterSearch" :key="employee.id">
-                        <td>{{ employee.name }}</td>
-                        <td><img :src="employee.photo" id="em_photo"></td>
-                        <td>{{ employee.phone }}</td>
-                        <td>{{ employee.salary }}</td>
-                        <td>{{ employee.joining_date }}</td>
+                      <tr v-for="supplier in filterSearch" :key="supplier.id">
+                        <td>{{ supplier.name }}</td>
+                        <td><img :src="supplier.photo" id="em_photo"></td>
+                        <td>{{ supplier.phone }}</td>
+                        <td>{{ supplier.address }}</td>
                         <td>
                         	<router-link :to="{ name: 'edit-employee', params: { id:employee.id }}" class="btn btn-sm btn-info" >Edit</router-link>
                         	<a @click="deleteEmployee(employee.id)" class="btn btn-sm btn-danger" style="color: white;">Delete</a>
@@ -64,22 +62,22 @@
 
 		data(){
 			return {
-				employees: [],
+				suppliers: [],
 				searchTerm: ''
 			}
 		},
 		computed:{
 			filterSearch(){
-				return this.employees.filter(employee => {
-					return employee.name.match(this.searchTerm)
+				return this.suppliers.filter(supplier => {
+					return supplier.name.match(this.searchTerm)
 				})
 			}
 		},
 
 		methods:{
 			allEmployee(){
-				axios.get('/api/employee/')
-				.then(({data}) => (this.employees = data) )
+				axios.get('/api/supplier/')
+				.then(({data}) => (this.suppliers = data) )
 				.catch()
 			},
 

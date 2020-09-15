@@ -113,7 +113,7 @@
 			supplierInsert(){
 				axios.post('/api/supplier/',this.form)
 				.then(() => {
-					this.$router.push({ name: 'allSupplier'})
+					this.$router.push({ name: 'allsupplier'})
 					Notification.success();
 				})
 				.catch(error => this.errors = error.response.data.errors)

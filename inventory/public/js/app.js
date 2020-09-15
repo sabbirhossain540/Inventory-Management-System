@@ -3102,7 +3102,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post('/api/supplier/', this.form).then(function () {
         _this.$router.push({
-          name: 'allSupplier'
+          name: 'allsupplier'
         });
 
         Notification.success();
@@ -3378,8 +3378,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
   //Using Hook method as like construction method
   //User.loggedIn() Method comes from User Helper Class
@@ -3392,7 +3390,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   data: function data() {
     return {
-      employees: [],
+      suppliers: [],
       searchTerm: ''
     };
   },
@@ -3400,8 +3398,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     filterSearch: function filterSearch() {
       var _this = this;
 
-      return this.employees.filter(function (employee) {
-        return employee.name.match(_this.searchTerm);
+      return this.suppliers.filter(function (supplier) {
+        return supplier.name.match(_this.searchTerm);
       });
     }
   },
@@ -3409,9 +3407,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     allEmployee: function allEmployee() {
       var _this2 = this;
 
-      axios.get('/api/employee/').then(function (_ref) {
+      axios.get('/api/supplier/').then(function (_ref) {
         var data = _ref.data;
-        return _this2.employees = data;
+        return _this2.suppliers = data;
       })["catch"]();
     },
     deleteEmployee: function deleteEmployee(id) {
@@ -49269,9 +49267,9 @@ var render = function() {
           "router-link",
           {
             staticClass: "btn btn-primary mb-3",
-            attrs: { to: "/store-employee" }
+            attrs: { to: "/store-supplier" }
           },
-          [_vm._v("Add Employee")]
+          [_vm._v("Add Supplier")]
         )
       ],
       1
@@ -49318,21 +49316,19 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "tbody",
-                  _vm._l(_vm.filterSearch, function(employee) {
-                    return _c("tr", { key: employee.id }, [
-                      _c("td", [_vm._v(_vm._s(employee.name))]),
+                  _vm._l(_vm.filterSearch, function(supplier) {
+                    return _c("tr", { key: supplier.id }, [
+                      _c("td", [_vm._v(_vm._s(supplier.name))]),
                       _vm._v(" "),
                       _c("td", [
                         _c("img", {
-                          attrs: { src: employee.photo, id: "em_photo" }
+                          attrs: { src: supplier.photo, id: "em_photo" }
                         })
                       ]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(employee.phone))]),
+                      _c("td", [_vm._v(_vm._s(supplier.phone))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(employee.salary))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(employee.joining_date))]),
+                      _c("td", [_vm._v(_vm._s(supplier.address))]),
                       _vm._v(" "),
                       _c(
                         "td",
@@ -49344,7 +49340,7 @@ var render = function() {
                               attrs: {
                                 to: {
                                   name: "edit-employee",
-                                  params: { id: employee.id }
+                                  params: { id: _vm.employee.id }
                                 }
                               }
                             },
@@ -49358,7 +49354,7 @@ var render = function() {
                               staticStyle: { color: "white" },
                               on: {
                                 click: function($event) {
-                                  return _vm.deleteEmployee(employee.id)
+                                  return _vm.deleteEmployee(_vm.employee.id)
                                 }
                               }
                             },
@@ -49394,7 +49390,7 @@ var staticRenderFns = [
       },
       [
         _c("h6", { staticClass: "m-0 font-weight-bold text-primary" }, [
-          _vm._v("Employee List")
+          _vm._v("Supplier List")
         ])
       ]
     )
@@ -49411,9 +49407,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Phone")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Sallery")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Joining Date")]),
+        _c("th", [_vm._v("Address")]),
         _vm._v(" "),
         _c("th", [_vm._v("Action")])
       ])

@@ -106,7 +106,8 @@
 					address: '',
 					phone: '',
 					shopname: '',
-					photo: ''
+					photo: '',
+					newphoto: ''
 				},
 
 				errors :{
@@ -117,7 +118,8 @@
 
 		methods:{
 			supplierUpdate(){
-				axios.post('/api/supplier/',this.form)
+				let id = this.$route.params.id
+				axios.patch('/api/supplier/'+id,this.form)
 				.then(() => {
 					this.$router.push({ name: 'allsupplier'})
 					Notification.success();

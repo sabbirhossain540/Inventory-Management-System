@@ -3255,7 +3255,8 @@ __webpack_require__.r(__webpack_exports__);
         address: '',
         phone: '',
         shopname: '',
-        photo: ''
+        photo: '',
+        newphoto: ''
       },
       errors: {}
     };
@@ -3264,7 +3265,8 @@ __webpack_require__.r(__webpack_exports__);
     supplierUpdate: function supplierUpdate() {
       var _this2 = this;
 
-      axios.post('/api/supplier/', this.form).then(function () {
+      var id = this.$route.params.id;
+      axios.patch('/api/supplier/' + id, this.form).then(function () {
         _this2.$router.push({
           name: 'allsupplier'
         });

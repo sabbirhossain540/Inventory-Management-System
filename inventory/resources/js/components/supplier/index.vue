@@ -33,7 +33,7 @@
                         <td>{{ supplier.phone }}</td>
                         <td>{{ supplier.address }}</td>
                         <td>
-                        	<router-link :to="{ name: 'edit-employee', params: { id:supplier.id }}" class="btn btn-sm btn-info" >Edit</router-link>
+                        	<router-link :to="{ name: 'edit-supplier', params: { id:supplier.id }}" class="btn btn-sm btn-info" >Edit</router-link>
                         	<a @click="deleteSupplier(supplier.id)" class="btn btn-sm btn-danger" style="color: white;">Delete</a>
                         </td>
                       </tr>

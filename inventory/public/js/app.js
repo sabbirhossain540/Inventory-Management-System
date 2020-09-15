@@ -3228,19 +3228,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   //Using Hook method as like construction method
   //User.loggedIn() Method comes from User Helper Class
@@ -3255,7 +3242,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
     var id = this.$route.params.id;
-    axios.get('/api/employee/' + id).then(function (_ref) {
+    axios.get('/api/supplier/' + id).then(function (_ref) {
       var data = _ref.data;
       return _this.form = data;
     })["catch"](console.log(error));
@@ -3266,24 +3253,20 @@ __webpack_require__.r(__webpack_exports__);
         name: '',
         email: '',
         address: '',
-        salary: '',
-        joining_date: '',
-        nid: '',
         phone: '',
-        photo: '',
-        newphoto: ''
+        shopname: '',
+        photo: ''
       },
       errors: {}
     };
   },
   methods: {
-    employeeUpdate: function employeeUpdate() {
+    supplierUpdate: function supplierUpdate() {
       var _this2 = this;
 
-      var id = this.$route.params.id;
-      axios.patch('/api/employee/' + id, this.form).then(function () {
+      axios.post('/api/supplier/', this.form).then(function () {
         _this2.$router.push({
-          name: 'allemployee'
+          name: 'allsupplier'
         });
 
         Notification.success();
@@ -3305,6 +3288,7 @@ __webpack_require__.r(__webpack_exports__);
 
         reader.onload = function (event) {
           _this3.form.photo = event.target.result;
+          console.log(event.target.result);
         };
 
         reader.readAsDataURL(file);
@@ -48855,8 +48839,8 @@ var render = function() {
       [
         _c(
           "router-link",
-          { staticClass: "btn btn-primary", attrs: { to: "/allemployee" } },
-          [_vm._v("All Employee")]
+          { staticClass: "btn btn-primary", attrs: { to: "/allsupplier" } },
+          [_vm._v("All Supplier")]
         )
       ],
       1
@@ -48879,7 +48863,7 @@ var render = function() {
                       on: {
                         submit: function($event) {
                           $event.preventDefault()
-                          return _vm.employeeUpdate($event)
+                          return _vm.supplierUpdate($event)
                         }
                       }
                     },
@@ -49010,124 +48994,6 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.form.salary,
-                                  expression: "form.salary"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              attrs: {
-                                type: "text",
-                                id: "salary",
-                                placeholder: "Enter your Salary"
-                              },
-                              domProps: { value: _vm.form.salary },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.form,
-                                    "salary",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _vm.errors.salary
-                              ? _c("small", { staticClass: "text-danger" }, [
-                                  _vm._v(_vm._s(_vm.errors.salary[0]))
-                                ])
-                              : _vm._e()
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("div", { staticClass: "form-row" }, [
-                          _c("div", { staticClass: "col-md-6" }, [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.form.joining_date,
-                                  expression: "form.joining_date"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              attrs: {
-                                type: "date",
-                                id: "joining_date",
-                                placeholder: "Enter your Joining Date"
-                              },
-                              domProps: { value: _vm.form.joining_date },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.form,
-                                    "joining_date",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _vm.errors.joining_date
-                              ? _c("small", { staticClass: "text-danger" }, [
-                                  _vm._v(_vm._s(_vm.errors.joining_date[0]))
-                                ])
-                              : _vm._e()
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-md-6" }, [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.form.nid,
-                                  expression: "form.nid"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              attrs: {
-                                type: "text",
-                                id: "nid",
-                                placeholder: "Enter your NID no"
-                              },
-                              domProps: { value: _vm.form.nid },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(_vm.form, "nid", $event.target.value)
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _vm.errors.nid
-                              ? _c("small", { staticClass: "text-danger" }, [
-                                  _vm._v(_vm._s(_vm.errors.nid[0]))
-                                ])
-                              : _vm._e()
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("div", { staticClass: "form-row" }, [
-                          _c("div", { staticClass: "col-md-6" }, [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
                                   value: _vm.form.phone,
                                   expression: "form.phone"
                                 }
@@ -49136,7 +49002,7 @@ var render = function() {
                               attrs: {
                                 type: "text",
                                 id: "phone",
-                                placeholder: "Enter your phone no"
+                                placeholder: "Enter your Phone no"
                               },
                               domProps: { value: _vm.form.phone },
                               on: {
@@ -49156,6 +49022,48 @@ var render = function() {
                             _vm.errors.phone
                               ? _c("small", { staticClass: "text-danger" }, [
                                   _vm._v(_vm._s(_vm.errors.phone[0]))
+                                ])
+                              : _vm._e()
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("div", { staticClass: "form-row" }, [
+                          _c("div", { staticClass: "col-md-6" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.shopname,
+                                  expression: "form.shopname"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                id: "shopname",
+                                placeholder: "Enter your Shop name"
+                              },
+                              domProps: { value: _vm.form.shopname },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.form,
+                                    "shopname",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _vm.errors.shopname
+                              ? _c("small", { staticClass: "text-danger" }, [
+                                  _vm._v(_vm._s(_vm.errors.shopname[0]))
                                 ])
                               : _vm._e()
                           ])
@@ -49220,7 +49128,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "text-center" }, [
       _c("h1", { staticClass: "h4 text-gray-900 mb-4" }, [
-        _vm._v("Update Employee")
+        _vm._v("Update Supplier")
       ])
     ])
   },
@@ -49232,7 +49140,7 @@ var staticRenderFns = [
       _c(
         "button",
         { staticClass: "btn btn-primary btn-block", attrs: { type: "submit" } },
-        [_vm._v("Update")]
+        [_vm._v("Submit")]
       )
     ])
   }
@@ -49339,7 +49247,7 @@ var render = function() {
                               staticClass: "btn btn-sm btn-info",
                               attrs: {
                                 to: {
-                                  name: "edit-employee",
+                                  name: "edit-supplier",
                                   params: { id: supplier.id }
                                 }
                               }

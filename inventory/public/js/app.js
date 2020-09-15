@@ -2796,23 +2796,25 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       form: {
-        name: null,
-        email: null,
-        address: null,
-        salary: null,
-        joining_date: null,
-        nid: null,
-        phone: null,
-        photo: null
+        name: '',
+        email: '',
+        address: '',
+        salary: '',
+        joining_date: '',
+        nid: '',
+        phone: '',
+        photo: '',
+        newphoto: ''
       },
       errors: {}
     };
   },
   methods: {
-    employeeInsert: function employeeInsert() {
+    employeeUpdate: function employeeUpdate() {
       var _this2 = this;
 
-      axios.post('/api/employee/', this.form).then(function () {
+      var id = this.$route.params.id;
+      axios.patch('/api/employee/' + id, this.form).then(function () {
         _this2.$router.push({
           name: 'allemployee'
         });
@@ -2836,7 +2838,6 @@ __webpack_require__.r(__webpack_exports__);
 
         reader.onload = function (event) {
           _this3.form.photo = event.target.result;
-          console.log(event.target.result);
         };
 
         reader.readAsDataURL(file);
@@ -47439,7 +47440,7 @@ var render = function() {
                       on: {
                         submit: function($event) {
                           $event.preventDefault()
-                          return _vm.employeeInsert($event)
+                          return _vm.employeeUpdate($event)
                         }
                       }
                     },
@@ -47792,7 +47793,7 @@ var staticRenderFns = [
       _c(
         "button",
         { staticClass: "btn btn-primary btn-block", attrs: { type: "submit" } },
-        [_vm._v("Submit")]
+        [_vm._v("Update")]
       )
     ])
   }

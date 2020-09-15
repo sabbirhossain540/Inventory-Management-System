@@ -13,7 +13,7 @@
 		                  <div class="text-center">
 		                    <h1 class="h4 text-gray-900 mb-4">Update Employee</h1>
 		                  </div>
-		                  <form class="user" @submit.prevent="employeeInsert" enctype="multipart/form-data">
+		                  <form class="user" @submit.prevent="employeeUpdate" enctype="multipart/form-data">
 
 		                    <div class="form-group">
 		                    	<div class="form-row">
@@ -79,7 +79,7 @@
 
 
 		                    <div class="form-group">
-		                      <button type="submit" class="btn btn-primary btn-block">Submit</button>
+		                      <button type="submit" class="btn btn-primary btn-block">Update</button>
 		                    </div>
 		                  </form>
 		                  <div class="text-center">
@@ -114,14 +114,15 @@
 		data(){
 			return {
 				form:{
-					name: null,
-					email: null,
-					address: null,
-					salary: null,
-					joining_date: null,
-					nid: null,
-					phone: null,
-					photo: null
+					name: '',
+					email: '',
+					address: '',
+					salary: '',
+					joining_date: '',
+					nid: '',
+					phone: '',
+					photo: '',
+					newphoto: ''
 				},
 
 				errors :{
@@ -131,8 +132,9 @@
 		},
 
 		methods:{
-			employeeInsert(){
-				axios.post('/api/employee/',this.form)
+			employeeUpdate(){
+				let id = this.$route.params.id
+				axios.patch('/api/employee/'+id,this.form)
 				.then(() => {
 					this.$router.push({ name: 'allemployee'})
 					Notification.success();
@@ -150,7 +152,6 @@
 					let reader = new FileReader();
 					reader.onload = event =>{
 						this.form.photo = event.target.result
-						console.log(event.target.result);
 					};
 					reader.readAsDataURL(file)
 				}

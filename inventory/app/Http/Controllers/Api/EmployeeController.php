@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Employee;
 use Image;
+use DB;
 
 class EmployeeController extends Controller
 {
@@ -86,7 +87,8 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        //
+        $employee = DB::table('employees')->where('id',$id)->first();
+        return response()->json($employee);
     }
 
     /**
@@ -109,7 +111,41 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = array();
+        $data['name'] = $request->name;
+        $data['email'] = $request->email;
+        $data['address'] = $request->address;
+        $data['salary'] = $request->salary;
+        $data['joining_date'] = $request->joining_date;
+        $data['nid'] = $request->nid;
+        $data['phone'] = $request->phone;
+
+        $image = $request->newphoto;
+
+        if($image){
+            $position = strpos($image, ';');
+            $sub = substr($image, 0, $position);
+            echo $sub;exit();
+            $ext = explode('/', $sub)[1];
+
+            $name = time().".".$ext;
+            $img = Image::make($image)->resize(240,200); //Use for Image Resize from image intervation
+            $upload_path = 'backend/employee/';
+            $image_url = $upload_path.$name;
+            $success = $img->save($image_url);
+
+            if($success){
+                $data['photo'] = $image_url;
+                $img = DB::table('employees')->where('id', $id)->first();
+                $image_path = $img->photo;
+                $done = unlink($image_path);
+                $user = DB::table('employees')->where('id',$id)->update($data);
+            }
+        }else{
+            $oldphoto = $request->photo;
+            $data['photo'] = $oldphoto;
+            $user = DB::table('employees')->where('id',$id)->update($data);
+        }
     }
 
     /**
@@ -120,6 +156,13 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $employee = DB::table('employees')->where('id', $id)->first();
+        $photo = $employee->photo;
+        if($photo){
+            unlink($photo);
+            DB::table('employees')->where('id',$id)->delete();
+        }else{
+            DB::table('employees')->where('id',$id)->delete();
+        }
     }
 }

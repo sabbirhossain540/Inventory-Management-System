@@ -11,6 +11,11 @@ let editEmployee = require('./components/employee/edit.vue').default;
 //End Authentication
 let home = require('./components/Home.vue').default;
 
+//Supplier
+let storeSupplier = require('./components/supplier/create.vue').default;
+let allSupplier = require('./components/supplier/index.vue').default;
+let editSupplier = require('./components/supplier/edit.vue').default;
+
 
 
 export const routes = [
@@ -22,6 +27,12 @@ export const routes = [
   { path: '/store-employee', component: storeEmployee, name:'store-employee' },
   { path: '/allemployee', component: allemployee, name:'allemployee' },
   { path: '/edit-employee/:id', component: editEmployee, name:'edit-employee' },
+
+  //Supplier Path
+  { path: '/store-supplier', component: storeSupplier, name:'store-supplier' },
+  { path: '/allsupplier', component: allSupplier, name:'allemployee' },
+  { path: '/edit-supplier/:id', component: editSupplier, name:'edit-supplier' },
+
 
   { path: '/home', component: home, name:'home' }
 ]

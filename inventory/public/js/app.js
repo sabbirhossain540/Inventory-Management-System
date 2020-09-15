@@ -3404,7 +3404,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   methods: {
-    allEmployee: function allEmployee() {
+    allSupplier: function allSupplier() {
       var _this2 = this;
 
       axios.get('/api/supplier/').then(function (_ref) {
@@ -3412,7 +3412,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return _this2.suppliers = data;
       })["catch"]();
     },
-    deleteEmployee: function deleteEmployee(id) {
+    deleteSupplier: function deleteSupplier(id) {
       var _this3 = this;
 
       Swal.fire({
@@ -3425,13 +3425,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
         if (result.isConfirmed) {
-          axios["delete"]('/api/employee/' + id).then(function () {
-            _this3.employees = _this3.employees.filter(function (employee) {
-              return employee.id != id;
+          axios["delete"]('/api/supplier/' + id).then(function () {
+            _this3.suppliers = _this3.suppliers.filter(function (supplier) {
+              return supplier.id != id;
             });
           })["catch"](function () {
             _this3.$router.push({
-              name: 'allemployee'
+              name: 'allsupplier'
             });
           });
           Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
@@ -3440,7 +3440,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }
 }, "created", function created() {
-  this.allEmployee();
+  this.allSupplier();
 }));
 
 /***/ }),
@@ -49340,7 +49340,7 @@ var render = function() {
                               attrs: {
                                 to: {
                                   name: "edit-employee",
-                                  params: { id: _vm.employee.id }
+                                  params: { id: supplier.id }
                                 }
                               }
                             },
@@ -49354,7 +49354,7 @@ var render = function() {
                               staticStyle: { color: "white" },
                               on: {
                                 click: function($event) {
-                                  return _vm.deleteEmployee(_vm.employee.id)
+                                  return _vm.deleteSupplier(supplier.id)
                                 }
                               }
                             },

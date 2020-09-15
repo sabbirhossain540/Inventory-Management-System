@@ -33,8 +33,8 @@
                         <td>{{ supplier.phone }}</td>
                         <td>{{ supplier.address }}</td>
                         <td>
-                        	<router-link :to="{ name: 'edit-employee', params: { id:employee.id }}" class="btn btn-sm btn-info" >Edit</router-link>
-                        	<a @click="deleteEmployee(employee.id)" class="btn btn-sm btn-danger" style="color: white;">Delete</a>
+                        	<router-link :to="{ name: 'edit-employee', params: { id:supplier.id }}" class="btn btn-sm btn-info" >Edit</router-link>
+                        	<a @click="deleteSupplier(supplier.id)" class="btn btn-sm btn-danger" style="color: white;">Delete</a>
                         </td>
                       </tr>
                      
@@ -75,13 +75,13 @@
 		},
 
 		methods:{
-			allEmployee(){
+			allSupplier(){
 				axios.get('/api/supplier/')
 				.then(({data}) => (this.suppliers = data) )
 				.catch()
 			},
 
-			deleteEmployee(id){
+			deleteSupplier(id){
 				Swal.fire({
 				  title: 'Are you sure?',
 				  text: "You won't be able to revert this!",
@@ -92,14 +92,14 @@
 				  confirmButtonText: 'Yes, delete it!'
 				}).then((result) => {
 				  if (result.isConfirmed) {
-				  	axios.delete('/api/employee/'+id)
+				  	axios.delete('/api/supplier/'+id)
 				  	.then(() => {
-				  		this.employees = this.employees.filter(employee => {
-				  			return employee.id != id
+				  		this.suppliers = this.suppliers.filter(supplier => {
+				  			return supplier.id != id
 				  		})
 				  	})
 				  	.catch(() => {
-				  		this.$router.push({name: 'allemployee'})
+				  		this.$router.push({name: 'allsupplier'})
 				  	})
 				    Swal.fire(
 				      'Deleted!',
@@ -112,7 +112,7 @@
 		},
 
 		created(){
-			this.allEmployee();
+			this.allSupplier();
 		}
 
 	}

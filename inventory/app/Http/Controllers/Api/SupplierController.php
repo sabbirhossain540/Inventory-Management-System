@@ -108,6 +108,13 @@ class SupplierController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $supplier = DB::table('suppliers')->where('id', $id)->first();
+        $photo = $supplier->photo;
+        if($photo){
+            unlink($photo);
+            DB::table('suppliers')->where('id',$id)->delete();
+        }else{
+            DB::table('suppliers')->where('id',$id)->delete();
+        }
     }
 }

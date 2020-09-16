@@ -3457,7 +3457,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       axios.post('/api/product/', this.form).then(function () {
         _this.$router.push({
-          name: 'allemployee'
+          name: 'allProduct'
         });
 
         Notification.success();
@@ -49953,7 +49953,7 @@ var render = function() {
                                 }
                               ],
                               staticClass: "form-control",
-                              attrs: { type: "email", id: "product_code" },
+                              attrs: { type: "text", id: "product_code" },
                               domProps: { value: _vm.form.product_code },
                               on: {
                                 input: function($event) {

@@ -24,7 +24,7 @@
 		                    		</div>
 		                    		<div class="col-md-6">
 		                    			<label>Product Code</label>
-		                      			<input type="email" class="form-control" id="product_code" v-model="form.product_code">
+		                      			<input type="text" class="form-control" id="product_code" v-model="form.product_code">
 		                      			<small class="text-danger" v-if="errors.product_code">{{ errors.product_code[0] }}</small>
 		                    		</div>
 		                    	</div>   
@@ -152,7 +152,7 @@
 			productInsert(){
 				axios.post('/api/product/',this.form)
 				.then(() => {
-					this.$router.push({ name: 'allemployee'})
+					this.$router.push({ name: 'allProduct'})
 					Notification.success();
 				})
 				.catch(error => this.errors = error.response.data.errors)

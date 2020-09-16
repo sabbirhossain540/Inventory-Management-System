@@ -3491,38 +3491,19 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    productEdit: function productEdit() {
+    expenseEdit: function expenseEdit() {
       var _this2 = this;
 
       var id = this.$route.params.id;
-      axios.patch('/api/product/' + id, this.form).then(function () {
+      axios.patch('/api/expense/' + id, this.form).then(function () {
         _this2.$router.push({
-          name: 'allProduct'
+          name: 'allExpense'
         });
 
         Notification.success();
       })["catch"](function (error) {
         return _this2.errors = error.response.data.errors;
       });
-    },
-    //For Image Size Check Function
-    onFileSelected: function onFileSelected(event) {
-      var _this3 = this;
-
-      var file = event.target.files[0];
-
-      if (file.size > 1048770) {
-        Notification.image_validation();
-      } else {
-        //For Instant Image Show
-        var reader = new FileReader();
-
-        reader.onload = function (event) {
-          _this3.form.newimage = event.target.result;
-        };
-
-        reader.readAsDataURL(file);
-      }
     }
   }
 });
@@ -50522,7 +50503,7 @@ var render = function() {
                       on: {
                         submit: function($event) {
                           $event.preventDefault()
-                          return _vm.expenseInsert($event)
+                          return _vm.expenseEdit($event)
                         }
                       }
                     },

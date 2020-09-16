@@ -13,7 +13,7 @@
 		                  <div class="text-center">
 		                    <h1 class="h4 text-gray-900 mb-4">Update Expense</h1>
 		                  </div>
-		                  <form class="user" @submit.prevent="expenseInsert" enctype="multipart/form-data">
+		                  <form class="user" @submit.prevent="expenseEdit" enctype="multipart/form-data">
 
 		                    <div class="form-group">
 		                    	<div class="form-row">
@@ -84,29 +84,14 @@
 		},
 
 		methods:{
-			productEdit(){
+			expenseEdit(){
 				let id = this.$route.params.id
-				axios.patch('/api/product/'+id,this.form)
+				axios.patch('/api/expense/'+id,this.form)
 				.then(() => {
-					this.$router.push({ name: 'allProduct'})
+					this.$router.push({ name: 'allExpense'})
 					Notification.success();
 				})
 				.catch(error => this.errors = error.response.data.errors)
-			},
-
-			//For Image Size Check Function
-			onFileSelected(event){
-				let file = event.target.files[0];
-				if(file.size > 1048770){
-					Notification.image_validation();
-				}else{
-					//For Instant Image Show
-					let reader = new FileReader();
-					reader.onload = event =>{
-						this.form.newimage = event.target.result
-					};
-					reader.readAsDataURL(file)
-				}
 			}
 		}
 

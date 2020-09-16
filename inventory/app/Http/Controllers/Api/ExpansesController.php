@@ -61,7 +61,16 @@ class ExpansesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validateData = $request->validate([
+            'details' => 'required'
+        ]);
+
+        $data = array();
+        $data['details'] = $request->details;
+        $data['amount'] = $request->amount;
+        $data['expanse_date'] = date('d/m/y');
+
+        DB::table('expenses')->where('id',$id)->update($data);
     }
 
     /**

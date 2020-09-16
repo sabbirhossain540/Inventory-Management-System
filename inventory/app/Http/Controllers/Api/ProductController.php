@@ -17,7 +17,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $product = DB::table('products')
+                    ->join('categories', 'products.category_id','categories.id')
+                    ->join('suppliers', 'products.supplier_id','suppliers.id')
+                    ->select('categories.category_name','suppliers.name','products.*')
+                    ->orderBy('products.id','DESC')
+                    ->get();
+                    return response()->json($product);
     }
 
 

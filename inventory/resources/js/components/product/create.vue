@@ -13,7 +13,7 @@
 		                  <div class="text-center">
 		                    <h1 class="h4 text-gray-900 mb-4">Add Product</h1>
 		                  </div>
-		                  <form class="user" @submit.prevent="employeeInsert" enctype="multipart/form-data">
+		                  <form class="user" @submit.prevent="productInsert" enctype="multipart/form-data">
 
 		                    <div class="form-group">
 		                    	<div class="form-row">
@@ -34,14 +34,14 @@
 		                    	<div class="form-row">
 		                    		<div class="col-md-6">
 		                    			<label>Product Category</label>
-		                      			<select class="form-control" id="product_category">
-		                      				<option>1</option>
+		                      			<select class="form-control" id="dfdf" v-model="form.category_id">
+		                      				<option :value="category.id" v-for="category in categories">{{ category.category_name }}</option>
 		                      			</select>
 		                    		</div>
 		                    		<div class="col-md-6">
 		                      			<label>Product Supplier</label>
-		                      			<select class="form-control" id="supplier">
-		                      				<option>1</option>
+		                      			<select class="form-control" id="supplier" v-model="form.supplier_id">
+		                      				<option :value="supplier.id" v-for="supplier in suppliers">{{ supplier.name }}</option>
 		                      			</select>
 		                    		</div>
 		                    	</div>   
@@ -128,25 +128,29 @@
 		data(){
 			return {
 				form:{
-					name: null,
-					email: null,
-					address: null,
-					salary: null,
-					joining_date: null,
-					nid: null,
-					phone: null,
-					photo: null
+					product_name: null,
+					product_code: null,
+					category_id: null,
+					root: null,
+					buying_price: null,
+					selling_price: null,
+					supplier_id: null,
+					buying_date: null,
+					product_quantity: null,
+					image: null
 				},
 
 				errors :{
 
-				}
+				},
+				categories:{},
+				suppliers:{},
 			}
 		},
 
 		methods:{
-			employeeInsert(){
-				axios.post('/api/employee/',this.form)
+			productInsert(){
+				axios.post('/api/product/',this.form)
 				.then(() => {
 					this.$router.push({ name: 'allemployee'})
 					Notification.success();
@@ -163,13 +167,21 @@
 					//For Instant Image Show
 					let reader = new FileReader();
 					reader.onload = event =>{
-						this.form.photo = event.target.result
+						this.form.image = event.target.result
 						console.log(event.target.result);
 					};
 					reader.readAsDataURL(file)
 				}
 			}
-		}
+		},
+
+		created(){
+				axios.get('/api/category/')
+				.then(({data}) => (this.categories = data))
+
+				axios.get('/api/supplier/')
+				.then(({data}) => (this.suppliers = data))
+			}
 
 	}
 	

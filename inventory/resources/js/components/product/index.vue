@@ -87,7 +87,7 @@
 				.catch()
 			},
 
-			deleteEmployee(id){
+			deleteProduct(id){
 				Swal.fire({
 				  title: 'Are you sure?',
 				  text: "You won't be able to revert this!",
@@ -98,14 +98,14 @@
 				  confirmButtonText: 'Yes, delete it!'
 				}).then((result) => {
 				  if (result.isConfirmed) {
-				  	axios.delete('/api/employee/'+id)
+				  	axios.delete('/api/product/'+id)
 				  	.then(() => {
-				  		this.employees = this.employees.filter(employee => {
-				  			return employee.id != id
+				  		this.products = this.products.filter(product => {
+				  			return product.id != id
 				  		})
 				  	})
 				  	.catch(() => {
-				  		this.$router.push({name: 'allemployee'})
+				  		this.$router.push({name: 'allProduct'})
 				  	})
 				    Swal.fire(
 				      'Deleted!',

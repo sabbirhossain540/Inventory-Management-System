@@ -3784,7 +3784,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return _this2.products = data;
       })["catch"]();
     },
-    deleteEmployee: function deleteEmployee(id) {
+    deleteProduct: function deleteProduct(id) {
       var _this3 = this;
 
       Swal.fire({
@@ -3797,13 +3797,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
         if (result.isConfirmed) {
-          axios["delete"]('/api/employee/' + id).then(function () {
-            _this3.employees = _this3.employees.filter(function (employee) {
-              return employee.id != id;
+          axios["delete"]('/api/product/' + id).then(function () {
+            _this3.products = _this3.products.filter(function (product) {
+              return product.id != id;
             });
           })["catch"](function () {
             _this3.$router.push({
-              name: 'allemployee'
+              name: 'allProduct'
             });
           });
           Swal.fire('Deleted!', 'Your file has been deleted.', 'success');

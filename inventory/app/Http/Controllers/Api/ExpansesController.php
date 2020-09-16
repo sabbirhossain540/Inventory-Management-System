@@ -48,7 +48,8 @@ class ExpansesController extends Controller
      */
     public function show($id)
     {
-        //
+        $expense = DB::table('expenses')->where('id',$id)->first();
+        return response()->json($expense);
     }
 
     /**
@@ -71,6 +72,6 @@ class ExpansesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('expenses')->where('id',$id)->delete();
     }
 }

@@ -75,12 +75,27 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#catCol"
               aria-expanded="true" aria-controls="catCol">
               <i class="far fa-fw fa-window-maximize"></i>
-              <span>Categories</span>
+              <span>Category</span>
             </a>
             <div id="catCol" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
               <div class="bg-white py-2 collapse-inner rounded">
                 <router-link class="collapse-item" to="/store-category">Add Category</router-link>
                 <router-link class="collapse-item" to="/allcategory">All Category</router-link>
+              </div>
+            </div>
+          </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#proCol"
+              aria-expanded="true" aria-controls="proCol">
+              <i class="far fa-fw fa-window-maximize"></i>
+              <span>Product</span>
+            </a>
+            <div id="proCol" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <router-link class="collapse-item" to="/store-product">Add Product</router-link>
+                <router-link class="collapse-item" to="/allproduct">All Product</router-link>
               </div>
             </div>
           </li>

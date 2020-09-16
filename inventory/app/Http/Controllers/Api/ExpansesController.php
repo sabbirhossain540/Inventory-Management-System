@@ -17,7 +17,8 @@ class ExpansesController extends Controller
      */
     public function index()
     {
-        //
+        $allexpense = Expenses::all();
+        return response()->json($allexpense);
     }
 
     /**
@@ -35,7 +36,7 @@ class ExpansesController extends Controller
             $expense = new Expenses;
             $expense->details = $request->details;
             $expense->amount = $request->amount;
-            $expense->expanse_date = $request->expanse_date;
+            $expense->expanse_date = date('d/m/y');
             $expense->save();
     }
 

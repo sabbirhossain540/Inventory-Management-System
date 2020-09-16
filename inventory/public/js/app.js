@@ -3359,11 +3359,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   //Using Hook method as like construction method
   //User.loggedIn() Method comes from User Helper Class
@@ -3378,8 +3373,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       form: {
         details: null,
-        amount: null,
-        expanse_date: null
+        amount: null
       },
       errors: {}
     };
@@ -3678,14 +3672,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
   //Using Hook method as like construction method
   //User.loggedIn() Method comes from User Helper Class
@@ -3698,7 +3684,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   data: function data() {
     return {
-      products: [],
+      expenses: [],
       searchTerm: ''
     };
   },
@@ -3706,18 +3692,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     filterSearch: function filterSearch() {
       var _this = this;
 
-      return this.products.filter(function (product) {
-        return product.product_name.match(_this.searchTerm);
+      return this.expenses.filter(function (expense) {
+        return expense.details.match(_this.searchTerm);
       });
     }
   },
   methods: {
-    allProduct: function allProduct() {
+    allExpense: function allExpense() {
       var _this2 = this;
 
-      axios.get('/api/product/').then(function (_ref) {
+      axios.get('/api/expense/').then(function (_ref) {
         var data = _ref.data;
-        return _this2.products = data;
+        return _this2.expenses = data;
       })["catch"]();
     },
     deleteProduct: function deleteProduct(id) {
@@ -3748,7 +3734,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }
 }, "created", function created() {
-  this.allProduct();
+  this.allExpense();
 }));
 
 /***/ }),
@@ -50490,7 +50476,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group" }, [
                         _c("div", { staticClass: "form-row" }, [
-                          _c("div", { staticClass: "col-md-6" }, [
+                          _c("div", { staticClass: "col-md-12" }, [
                             _c("label", [_vm._v("Expense Amount")]),
                             _vm._v(" "),
                             _c("input", {
@@ -50522,42 +50508,6 @@ var render = function() {
                             _vm.errors.amount
                               ? _c("small", { staticClass: "text-danger" }, [
                                   _vm._v(_vm._s(_vm.errors.amount[0]))
-                                ])
-                              : _vm._e()
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-md-6" }, [
-                            _c("label", [_vm._v("Expense Date")]),
-                            _vm._v(" "),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.form.expanse_date,
-                                  expression: "form.expanse_date"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              attrs: { type: "date", id: "expanse_date" },
-                              domProps: { value: _vm.form.expanse_date },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.form,
-                                    "expanse_date",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _vm.errors.expanse_date
-                              ? _c("small", { staticClass: "text-danger" }, [
-                                  _vm._v(_vm._s(_vm.errors.expanse_date[0]))
                                 ])
                               : _vm._e()
                           ])
@@ -51128,9 +51078,9 @@ var render = function() {
           "router-link",
           {
             staticClass: "btn btn-primary mb-3",
-            attrs: { to: "/store-product" }
+            attrs: { to: "/store-expense" }
           },
-          [_vm._v("Add Product")]
+          [_vm._v("Add Expense")]
         )
       ],
       1
@@ -51177,25 +51127,13 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "tbody",
-                  _vm._l(_vm.filterSearch, function(product) {
-                    return _c("tr", { key: product.id }, [
-                      _c("td", [_vm._v(_vm._s(product.product_name))]),
+                  _vm._l(_vm.filterSearch, function(expense) {
+                    return _c("tr", { key: expense.id }, [
+                      _c("td", [_vm._v(_vm._s(expense.details))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(product.product_code))]),
+                      _c("td", [_vm._v(_vm._s(expense.amount))]),
                       _vm._v(" "),
-                      _c("td", [
-                        _c("img", {
-                          attrs: { src: product.image, id: "em_photo" }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(product.category_name))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(product.buying_price))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(product.selling_price))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(product.root))]),
+                      _c("td", [_vm._v(_vm._s(expense.expanse_date))]),
                       _vm._v(" "),
                       _c(
                         "td",
@@ -51206,8 +51144,8 @@ var render = function() {
                               staticClass: "btn btn-sm btn-info",
                               attrs: {
                                 to: {
-                                  name: "edit-product",
-                                  params: { id: product.id }
+                                  name: "edit-expense",
+                                  params: { id: expense.id }
                                 }
                               }
                             },
@@ -51221,7 +51159,7 @@ var render = function() {
                               staticStyle: { color: "white" },
                               on: {
                                 click: function($event) {
-                                  return _vm.deleteProduct(product.id)
+                                  return _vm.deleteExpanse(expense.id)
                                 }
                               }
                             },
@@ -51257,7 +51195,7 @@ var staticRenderFns = [
       },
       [
         _c("h6", { staticClass: "m-0 font-weight-bold text-primary" }, [
-          _vm._v("Product List")
+          _vm._v("Expense List")
         ])
       ]
     )
@@ -51268,19 +51206,11 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "thead-light" }, [
       _c("tr", [
-        _c("th", [_vm._v("Name")]),
+        _c("th", [_vm._v("Details")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Code")]),
+        _c("th", [_vm._v("Amount")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Photo")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Category")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Buying Price")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Selling Price")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Root")]),
+        _c("th", [_vm._v("Date")]),
         _vm._v(" "),
         _c("th", [_vm._v("Action")])
       ])

@@ -27,15 +27,10 @@
 
 		                    <div class="form-group">
 		                    	<div class="form-row">
-		                    		<div class="col-md-6">
+		                    		<div class="col-md-12">
 		                    			<label>Expense Amount</label>
 		                      			<input type="text" class="form-control" id="amount"  v-model="form.amount">
 		                      			<small class="text-danger" v-if="errors.amount">{{ errors.amount[0] }}</small>
-		                    		</div>
-		                    		<div class="col-md-6">
-		                    			<label>Expense Date</label>
-		                      			<input type="date" class="form-control" id="expanse_date" v-model="form.expanse_date">
-		                      			<small class="text-danger" v-if="errors.expanse_date">{{ errors.expanse_date[0] }}</small>
 		                    		</div>
 		                    		
 		                    	</div>    
@@ -74,7 +69,6 @@
 				form:{
 					details: null,
 					amount: null,
-					expanse_date: null,
 				},
 
 				errors :{

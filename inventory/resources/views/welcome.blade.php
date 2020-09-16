@@ -100,6 +100,20 @@
             </div>
           </li>
 
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#proCol"
+              aria-expanded="true" aria-controls="proCol">
+              <i class="far fa-fw fa-window-maximize"></i>
+              <span>Expense</span>
+            </a>
+            <div id="proCol" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <router-link class="collapse-item" to="/store-product">Add expense</router-link>
+                <router-link class="collapse-item" to="/allproduct">All Expense</router-link>
+              </div>
+            </div>
+          </li>
+
 
           <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm" aria-expanded="true"

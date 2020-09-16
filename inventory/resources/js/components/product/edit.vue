@@ -1,7 +1,7 @@
 <template>
 	    <div>
 	    	<div class="row mx-1">
-	    		<router-link to="/allemployee" class="btn btn-primary">All Employee</router-link>
+	    		<router-link to="/allProduct" class="btn btn-primary">All Product</router-link>
 	    	</div>
 		    <div class="row justify-content-center">
 		      <div class="col-xl-12 col-lg-12 col-md-12">
@@ -11,19 +11,21 @@
 		              <div class="col-lg-12">
 		                <div class="login-form">
 		                  <div class="text-center">
-		                    <h1 class="h4 text-gray-900 mb-4">Update Employee</h1>
+		                    <h1 class="h4 text-gray-900 mb-4">Update Product</h1>
 		                  </div>
-		                  <form class="user" @submit.prevent="employeeUpdate" enctype="multipart/form-data">
+		                  <form class="user" @submit.prevent="productEdit" enctype="multipart/form-data">
 
 		                    <div class="form-group">
 		                    	<div class="form-row">
 		                    		<div class="col-md-6">
-		                      			<input type="text" class="form-control" id="name" placeholder="Enter your name" v-model="form.name">
-		                      			<small class="text-danger" v-if="errors.name">{{ errors.name[0] }}</small>
+		                    			<label>Product Name</label>
+		                      			<input type="text" class="form-control" id="product_name" v-model="form.product_name">
+		                      			<small class="text-danger" v-if="errors.product_name">{{ errors.product_name[0] }}</small>
 		                    		</div>
 		                    		<div class="col-md-6">
-		                      			<input type="email" class="form-control" id="email" placeholder="Enter your email" v-model="form.email">
-		                      			<small class="text-danger" v-if="errors.email">{{ errors.email[0] }}</small>
+		                    			<label>Product Code</label>
+		                      			<input type="text" class="form-control" id="product_code" v-model="form.product_code">
+		                      			<small class="text-danger" v-if="errors.product_code">{{ errors.product_code[0] }}</small>
 		                    		</div>
 		                    	</div>   
 		                    </div>
@@ -31,34 +33,52 @@
 		                    <div class="form-group">
 		                    	<div class="form-row">
 		                    		<div class="col-md-6">
-		                      			<input type="text" class="form-control" id="address" placeholder="Enter your Address" v-model="form.address">
-		                      			<small class="text-danger" v-if="errors.address">{{ errors.address[0] }}</small>
+		                    			<label>Product Category</label>
+		                      			<select class="form-control" id="dfdf" v-model="form.category_id">
+		                      				<option :value="category.id" v-for="category in categories">{{ category.category_name }}</option>
+		                      			</select>
 		                    		</div>
 		                    		<div class="col-md-6">
-		                      			<input type="text" class="form-control" id="salary" placeholder="Enter your Salary" v-model="form.salary">
-		                      			<small class="text-danger" v-if="errors.salary">{{ errors.salary[0] }}</small>
-		                    		</div>
-		                    	</div>   
-		                    </div>
-
-		                    <div class="form-group">
-		                    	<div class="form-row">
-		                    		<div class="col-md-6">
-		                      			<input type="date" class="form-control" id="joining_date" placeholder="Enter your Joining Date" v-model="form.joining_date">
-		                      			<small class="text-danger" v-if="errors.joining_date">{{ errors.joining_date[0] }}</small>
-		                    		</div>
-		                    		<div class="col-md-6">
-		                      			<input type="text" class="form-control" id="nid" placeholder="Enter your NID no" v-model="form.nid">
-		                      			<small class="text-danger" v-if="errors.nid">{{ errors.nid[0] }}</small>
+		                      			<label>Product Supplier</label>
+		                      			<select class="form-control" id="supplier" v-model="form.supplier_id">
+		                      				<option :value="supplier.id" v-for="supplier in suppliers">{{ supplier.name }}</option>
+		                      			</select>
 		                    		</div>
 		                    	</div>   
 		                    </div>
 
 		                     <div class="form-group">
 		                    	<div class="form-row">
+		                    		<div class="col-md-4">
+		                    			<label>Product Root</label>
+		                      			<input type="text" class="form-control" id="root" v-model="form.root">
+		                      			<small class="text-danger" v-if="errors.root">{{ errors.root[0] }}</small>
+		                    		</div>
+		                    		<div class="col-md-4">
+		                    			<label>Buying Price</label>
+		                      			<input type="text" class="form-control" id="buying_price" v-model="form.buying_price">
+		                      			<small class="text-danger" v-if="errors.buying_price">{{ errors.buying_price[0] }}</small>
+		                    		</div>
+
+		                    		<div class="col-md-4">
+		                    			<label>Selling Price</label>
+		                      			<input type="text" class="form-control" id="selling_price" v-model="form.selling_price">
+		                      			<small class="text-danger" v-if="errors.selling_price">{{ errors.selling_price[0] }}</small>
+		                    		</div>
+		                    	</div>   
+		                    </div>
+
+		                    <div class="form-group">
+		                    	<div class="form-row">
 		                    		<div class="col-md-6">
-		                      			<input type="text" class="form-control" id="phone" placeholder="Enter your phone no" v-model="form.phone">
-		                      			<small class="text-danger" v-if="errors.phone">{{ errors.phone[0] }}</small>
+		                    			<label>Buying Date</label>
+		                      			<input type="date" class="form-control" id="buying_date" v-model="form.buying_date">
+		                      			<small class="text-danger" v-if="errors.buying_date">{{ errors.buying_date[0] }}</small>
+		                    		</div>
+		                    		<div class="col-md-6">
+		                    			<label>Product Quantity</label>
+		                      			<input type="text" class="form-control" id="product_quantity"  v-model="form.product_quantity">
+		                      			<small class="text-danger" v-if="errors.product_quantity">{{ errors.product_quantity[0] }}</small>
 		                    		</div>
 		                    	</div>   
 		                    </div>
@@ -67,12 +87,12 @@
 		                    	<div class="form-row">
 		                    		<div class="col-md-6">
 		                      			<input type="file" class="custom-file-input" id="customeFile" @change="onFileSelected">
-		                      			<small class="text-danger" v-if="errors.photo">{{ errors.photo[0] }}</small>
+		                      			<small class="text-danger" v-if="errors.image">{{ errors.image[0] }}</small>
 		                      			<label class="custom-file-label" for="customeFile">Choose file</label>
 		                    		</div>
 
 		                    		<div class="col-md-6">
-		                    			<img :src="form.photo" height="40px" width="40px">
+		                    			<img :src="form.image" height="40px" width="40px">
 		                    		</div>
 		                    	</div>   
 		                    </div>
@@ -104,39 +124,55 @@
 				this.$router.push({name: '/'})
 			}
 
+			//Category Collection
+			axios.get('/api/category/')
+			.then(({data}) => (this.categories = data))
+
+			//Supplier Collection
+			axios.get('/api/supplier/')
+			.then(({data}) => (this.suppliers = data))
+
 			//Retrive Data for edit
 			let id = this.$route.params.id
-			axios.get('/api/employee/'+id)
+			axios.get('/api/product/'+id)
 			.then(({data}) => (this.form = data))
 			.catch(console.log(error))
+
+
+
+
 		},
 
 		data(){
 			return {
 				form:{
-					name: '',
-					email: '',
-					address: '',
-					salary: '',
-					joining_date: '',
-					nid: '',
-					phone: '',
-					photo: '',
-					newphoto: ''
+					product_name: '',
+					product_code: '',
+					category_id: '',
+					root: '',
+					buying_price: '',
+					selling_price: '',
+					supplier_id: '',
+					buying_date: '',
+					product_quantity: '',
+					image: '',
+					newimage: ''
 				},
 
 				errors :{
 
-				}
+				},
+				categories:{},
+				suppliers:{},
 			}
 		},
 
 		methods:{
-			employeeUpdate(){
+			productEdit(){
 				let id = this.$route.params.id
-				axios.patch('/api/employee/'+id,this.form)
+				axios.patch('/api/product/'+id,this.form)
 				.then(() => {
-					this.$router.push({ name: 'allemployee'})
+					this.$router.push({ name: 'allProduct'})
 					Notification.success();
 				})
 				.catch(error => this.errors = error.response.data.errors)
@@ -151,7 +187,7 @@
 					//For Instant Image Show
 					let reader = new FileReader();
 					reader.onload = event =>{
-						this.form.photo = event.target.result
+						this.form.newimage = event.target.result
 					};
 					reader.readAsDataURL(file)
 				}

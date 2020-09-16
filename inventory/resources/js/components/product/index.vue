@@ -39,7 +39,7 @@
                         <td>{{ product.selling_price }}</td>
                         <td>{{ product.root }}</td>
                         <td>
-                        	<router-link :to="{ name: 'edit-employee', params: { id:product.id }}" class="btn btn-sm btn-info" >Edit</router-link>
+                        	<router-link :to="{ name: 'edit-product', params: { id:product.id }}" class="btn btn-sm btn-info" >Edit</router-link>
                         	<a @click="deleteProduct(product.id)" class="btn btn-sm btn-danger" style="color: white;">Delete</a>
                         </td>
                       </tr>
@@ -75,7 +75,7 @@
 		computed:{
 			filterSearch(){
 				return this.products.filter(product => {
-					return product.name.match(this.searchTerm)
+					return product.product_name.match(this.searchTerm)
 				})
 			}
 		},

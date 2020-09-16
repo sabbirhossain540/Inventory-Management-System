@@ -101,15 +101,15 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#proCol"
-              aria-expanded="true" aria-controls="proCol">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#excCol"
+              aria-expanded="true" aria-controls="excCol">
               <i class="far fa-fw fa-window-maximize"></i>
               <span>Expense</span>
             </a>
-            <div id="proCol" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+            <div id="excCol" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
               <div class="bg-white py-2 collapse-inner rounded">
-                <router-link class="collapse-item" to="/store-product">Add expense</router-link>
-                <router-link class="collapse-item" to="/allproduct">All Expense</router-link>
+                <router-link class="collapse-item" to="/store-expense">Add expense</router-link>
+                <router-link class="collapse-item" to="/allExpense">All Expense</router-link>
               </div>
             </div>
           </li>

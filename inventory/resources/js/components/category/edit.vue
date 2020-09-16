@@ -1,7 +1,7 @@
 <template>
 	    <div>
 	    	<div class="row mx-1">
-	    		<router-link to="/allsupplier" class="btn btn-primary">All Supplier</router-link>
+	    		<router-link to="/allsupplier" class="btn btn-primary">All Category</router-link>
 	    	</div>
 		    <div class="row justify-content-center">
 		      <div class="col-xl-12 col-lg-12 col-md-12">
@@ -11,58 +11,19 @@
 		              <div class="col-lg-12">
 		                <div class="login-form">
 		                  <div class="text-center">
-		                    <h1 class="h4 text-gray-900 mb-4">Update Supplier</h1>
+		                    <h1 class="h4 text-gray-900 mb-4">Update Category</h1>
 		                  </div>
-		                  <form class="user" @submit.prevent="supplierUpdate" enctype="multipart/form-data">
+		                  <form class="user" @submit.prevent="categoryUpdate" enctype="multipart/form-data">
 
 		                    <div class="form-group">
 		                    	<div class="form-row">
-		                    		<div class="col-md-6">
-		                      			<input type="text" class="form-control" id="name" placeholder="Enter your name" v-model="form.name">
-		                      			<small class="text-danger" v-if="errors.name">{{ errors.name[0] }}</small>
-		                    		</div>
-		                    		<div class="col-md-6">
-		                      			<input type="email" class="form-control" id="email" placeholder="Enter your email" v-model="form.email">
-		                      			<small class="text-danger" v-if="errors.email">{{ errors.email[0] }}</small>
+		                    		<div class="col-md-12">
+		                      			<input type="text" class="form-control" id="category_name" placeholder="Enter your name" v-model="form.category_name">
+		                      			<small class="text-danger" v-if="errors.category_name">{{ errors.category_name[0] }}</small>
 		                    		</div>
 		                    	</div>   
 		                    </div>
 
-		                    <div class="form-group">
-		                    	<div class="form-row">
-		                    		<div class="col-md-6">
-		                      			<input type="text" class="form-control" id="address" placeholder="Enter your Address" v-model="form.address">
-		                      			<small class="text-danger" v-if="errors.address">{{ errors.address[0] }}</small>
-		                    		</div>
-		                    		<div class="col-md-6">
-		                      			<input type="text" class="form-control" id="phone" placeholder="Enter your Phone no" v-model="form.phone">
-		                      			<small class="text-danger" v-if="errors.phone">{{ errors.phone[0] }}</small>
-		                    		</div>
-		                    	</div>   
-		                    </div>
-
-		                     <div class="form-group">
-		                    	<div class="form-row">
-		                    		<div class="col-md-6">
-		                      			<input type="text" class="form-control" id="shopname" placeholder="Enter your Shop name" v-model="form.shopname">
-		                      			<small class="text-danger" v-if="errors.shopname">{{ errors.shopname[0] }}</small>
-		                    		</div>
-		                    	</div>   
-		                    </div>
-
-		                    <div class="form-group">
-		                    	<div class="form-row">
-		                    		<div class="col-md-6">
-		                      			<input type="file" class="custom-file-input" id="customeFile" @change="onFileSelected">
-		                      			<small class="text-danger" v-if="errors.photo">{{ errors.photo[0] }}</small>
-		                      			<label class="custom-file-label" for="customeFile">Choose file</label>
-		                    		</div>
-
-		                    		<div class="col-md-6">
-		                    			<img :src="form.photo" height="40px" width="40px">
-		                    		</div>
-		                    	</div>   
-		                    </div>
 
 
 		                    <div class="form-group">
@@ -93,7 +54,7 @@
 
 			//Retrive Data for edit
 			let id = this.$route.params.id
-			axios.get('/api/supplier/'+id)
+			axios.get('/api/category/'+id)
 			.then(({data}) => (this.form = data))
 			.catch(console.log(error))
 		},
@@ -101,13 +62,7 @@
 		data(){
 			return {
 				form:{
-					name: '',
-					email: '',
-					address: '',
-					phone: '',
-					shopname: '',
-					photo: '',
-					newphoto: ''
+					category_name: ''
 				},
 
 				errors :{
@@ -117,30 +72,14 @@
 		},
 
 		methods:{
-			supplierUpdate(){
+			categoryUpdate(){
 				let id = this.$route.params.id
-				axios.patch('/api/supplier/'+id,this.form)
+				axios.patch('/api/category/'+id,this.form)
 				.then(() => {
-					this.$router.push({ name: 'allsupplier'})
+					this.$router.push({ name: 'allCategory'})
 					Notification.success();
 				})
 				.catch(error => this.errors = error.response.data.errors)
-			},
-
-			//For Image Size Check Function
-			onFileSelected(event){
-				let file = event.target.files[0];
-				if(file.size > 1048770){
-					Notification.image_validation();
-				}else{
-					//For Instant Image Show
-					let reader = new FileReader();
-					reader.onload = event =>{
-						this.form.photo = event.target.result
-						console.log(event.target.result);
-					};
-					reader.readAsDataURL(file)
-				}
 			}
 		}
 

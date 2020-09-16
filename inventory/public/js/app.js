@@ -2641,45 +2641,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   //Using Hook method as like construction method
   //User.loggedIn() Method comes from User Helper Class
@@ -2694,7 +2655,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
     var id = this.$route.params.id;
-    axios.get('/api/supplier/' + id).then(function (_ref) {
+    axios.get('/api/category/' + id).then(function (_ref) {
       var data = _ref.data;
       return _this.form = data;
     })["catch"](console.log(error));
@@ -2702,51 +2663,25 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       form: {
-        name: '',
-        email: '',
-        address: '',
-        phone: '',
-        shopname: '',
-        photo: '',
-        newphoto: ''
+        category_name: ''
       },
       errors: {}
     };
   },
   methods: {
-    supplierUpdate: function supplierUpdate() {
+    categoryUpdate: function categoryUpdate() {
       var _this2 = this;
 
       var id = this.$route.params.id;
-      axios.patch('/api/supplier/' + id, this.form).then(function () {
+      axios.patch('/api/category/' + id, this.form).then(function () {
         _this2.$router.push({
-          name: 'allsupplier'
+          name: 'allCategory'
         });
 
         Notification.success();
       })["catch"](function (error) {
         return _this2.errors = error.response.data.errors;
       });
-    },
-    //For Image Size Check Function
-    onFileSelected: function onFileSelected(event) {
-      var _this3 = this;
-
-      var file = event.target.files[0];
-
-      if (file.size > 1048770) {
-        Notification.image_validation();
-      } else {
-        //For Instant Image Show
-        var reader = new FileReader();
-
-        reader.onload = function (event) {
-          _this3.form.photo = event.target.result;
-          console.log(event.target.result);
-        };
-
-        reader.readAsDataURL(file);
-      }
     }
   }
 });
@@ -2810,12 +2745,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
   //Using Hook method as like construction method
   //User.loggedIn() Method comes from User Helper Class
@@ -2828,7 +2757,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   data: function data() {
     return {
-      suppliers: [],
+      categories: [],
       searchTerm: ''
     };
   },
@@ -2836,21 +2765,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     filterSearch: function filterSearch() {
       var _this = this;
 
-      return this.suppliers.filter(function (supplier) {
-        return supplier.name.match(_this.searchTerm);
+      return this.categories.filter(function (category) {
+        return category.category_name.match(_this.searchTerm);
       });
     }
   },
   methods: {
-    allSupplier: function allSupplier() {
+    allCategory: function allCategory() {
       var _this2 = this;
 
-      axios.get('/api/supplier/').then(function (_ref) {
+      axios.get('/api/category/').then(function (_ref) {
         var data = _ref.data;
-        return _this2.suppliers = data;
+        return _this2.categories = data;
       })["catch"]();
     },
-    deleteSupplier: function deleteSupplier(id) {
+    deleteCategory: function deleteCategory(id) {
       var _this3 = this;
 
       Swal.fire({
@@ -2863,13 +2792,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
         if (result.isConfirmed) {
-          axios["delete"]('/api/supplier/' + id).then(function () {
-            _this3.suppliers = _this3.suppliers.filter(function (supplier) {
-              return supplier.id != id;
+          axios["delete"]('/api/category/' + id).then(function () {
+            _this3.categories = _this3.categories.filter(function (category) {
+              return category.id != id;
             });
           })["catch"](function () {
             _this3.$router.push({
-              name: 'allsupplier'
+              name: 'allcategory'
             });
           });
           Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
@@ -2878,7 +2807,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }
 }, "created", function created() {
-  this.allSupplier();
+  this.allCategory();
 }));
 
 /***/ }),
@@ -48078,7 +48007,7 @@ var render = function() {
         _c(
           "router-link",
           { staticClass: "btn btn-primary", attrs: { to: "/allsupplier" } },
-          [_vm._v("All Supplier")]
+          [_vm._v("All Category")]
         )
       ],
       1
@@ -48101,30 +48030,30 @@ var render = function() {
                       on: {
                         submit: function($event) {
                           $event.preventDefault()
-                          return _vm.supplierUpdate($event)
+                          return _vm.categoryUpdate($event)
                         }
                       }
                     },
                     [
                       _c("div", { staticClass: "form-group" }, [
                         _c("div", { staticClass: "form-row" }, [
-                          _c("div", { staticClass: "col-md-6" }, [
+                          _c("div", { staticClass: "col-md-12" }, [
                             _c("input", {
                               directives: [
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.form.name,
-                                  expression: "form.name"
+                                  value: _vm.form.category_name,
+                                  expression: "form.category_name"
                                 }
                               ],
                               staticClass: "form-control",
                               attrs: {
                                 type: "text",
-                                id: "name",
+                                id: "category_name",
                                 placeholder: "Enter your name"
                               },
-                              domProps: { value: _vm.form.name },
+                              domProps: { value: _vm.form.category_name },
                               on: {
                                 input: function($event) {
                                   if ($event.target.composing) {
@@ -48132,215 +48061,18 @@ var render = function() {
                                   }
                                   _vm.$set(
                                     _vm.form,
-                                    "name",
+                                    "category_name",
                                     $event.target.value
                                   )
                                 }
                               }
                             }),
                             _vm._v(" "),
-                            _vm.errors.name
+                            _vm.errors.category_name
                               ? _c("small", { staticClass: "text-danger" }, [
-                                  _vm._v(_vm._s(_vm.errors.name[0]))
+                                  _vm._v(_vm._s(_vm.errors.category_name[0]))
                                 ])
                               : _vm._e()
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-md-6" }, [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.form.email,
-                                  expression: "form.email"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              attrs: {
-                                type: "email",
-                                id: "email",
-                                placeholder: "Enter your email"
-                              },
-                              domProps: { value: _vm.form.email },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.form,
-                                    "email",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _vm.errors.email
-                              ? _c("small", { staticClass: "text-danger" }, [
-                                  _vm._v(_vm._s(_vm.errors.email[0]))
-                                ])
-                              : _vm._e()
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("div", { staticClass: "form-row" }, [
-                          _c("div", { staticClass: "col-md-6" }, [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.form.address,
-                                  expression: "form.address"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              attrs: {
-                                type: "text",
-                                id: "address",
-                                placeholder: "Enter your Address"
-                              },
-                              domProps: { value: _vm.form.address },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.form,
-                                    "address",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _vm.errors.address
-                              ? _c("small", { staticClass: "text-danger" }, [
-                                  _vm._v(_vm._s(_vm.errors.address[0]))
-                                ])
-                              : _vm._e()
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-md-6" }, [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.form.phone,
-                                  expression: "form.phone"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              attrs: {
-                                type: "text",
-                                id: "phone",
-                                placeholder: "Enter your Phone no"
-                              },
-                              domProps: { value: _vm.form.phone },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.form,
-                                    "phone",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _vm.errors.phone
-                              ? _c("small", { staticClass: "text-danger" }, [
-                                  _vm._v(_vm._s(_vm.errors.phone[0]))
-                                ])
-                              : _vm._e()
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("div", { staticClass: "form-row" }, [
-                          _c("div", { staticClass: "col-md-6" }, [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.form.shopname,
-                                  expression: "form.shopname"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              attrs: {
-                                type: "text",
-                                id: "shopname",
-                                placeholder: "Enter your Shop name"
-                              },
-                              domProps: { value: _vm.form.shopname },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.form,
-                                    "shopname",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _vm.errors.shopname
-                              ? _c("small", { staticClass: "text-danger" }, [
-                                  _vm._v(_vm._s(_vm.errors.shopname[0]))
-                                ])
-                              : _vm._e()
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("div", { staticClass: "form-row" }, [
-                          _c("div", { staticClass: "col-md-6" }, [
-                            _c("input", {
-                              staticClass: "custom-file-input",
-                              attrs: { type: "file", id: "customeFile" },
-                              on: { change: _vm.onFileSelected }
-                            }),
-                            _vm._v(" "),
-                            _vm.errors.photo
-                              ? _c("small", { staticClass: "text-danger" }, [
-                                  _vm._v(_vm._s(_vm.errors.photo[0]))
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _c(
-                              "label",
-                              {
-                                staticClass: "custom-file-label",
-                                attrs: { for: "customeFile" }
-                              },
-                              [_vm._v("Choose file")]
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-md-6" }, [
-                            _c("img", {
-                              attrs: {
-                                src: _vm.form.photo,
-                                height: "40px",
-                                width: "40px"
-                              }
-                            })
                           ])
                         ])
                       ]),
@@ -48366,7 +48098,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "text-center" }, [
       _c("h1", { staticClass: "h4 text-gray-900 mb-4" }, [
-        _vm._v("Update Supplier")
+        _vm._v("Update Category")
       ])
     ])
   },
@@ -48413,9 +48145,9 @@ var render = function() {
           "router-link",
           {
             staticClass: "btn btn-primary mb-3",
-            attrs: { to: "/store-supplier" }
+            attrs: { to: "/store-category" }
           },
-          [_vm._v("Add Supplier")]
+          [_vm._v("Add Category")]
         )
       ],
       1
@@ -48462,19 +48194,9 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "tbody",
-                  _vm._l(_vm.filterSearch, function(supplier) {
-                    return _c("tr", { key: supplier.id }, [
-                      _c("td", [_vm._v(_vm._s(supplier.name))]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c("img", {
-                          attrs: { src: supplier.photo, id: "em_photo" }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(supplier.phone))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(supplier.address))]),
+                  _vm._l(_vm.filterSearch, function(category) {
+                    return _c("tr", { key: category.id }, [
+                      _c("td", [_vm._v(_vm._s(category.category_name))]),
                       _vm._v(" "),
                       _c(
                         "td",
@@ -48485,8 +48207,8 @@ var render = function() {
                               staticClass: "btn btn-sm btn-info",
                               attrs: {
                                 to: {
-                                  name: "edit-supplier",
-                                  params: { id: supplier.id }
+                                  name: "edit-category",
+                                  params: { id: category.id }
                                 }
                               }
                             },
@@ -48500,7 +48222,7 @@ var render = function() {
                               staticStyle: { color: "white" },
                               on: {
                                 click: function($event) {
-                                  return _vm.deleteSupplier(supplier.id)
+                                  return _vm.deleteCategory(category.id)
                                 }
                               }
                             },
@@ -48536,7 +48258,7 @@ var staticRenderFns = [
       },
       [
         _c("h6", { staticClass: "m-0 font-weight-bold text-primary" }, [
-          _vm._v("Supplier List")
+          _vm._v("Category List")
         ])
       ]
     )
@@ -48547,13 +48269,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "thead-light" }, [
       _c("tr", [
-        _c("th", [_vm._v("Name")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Photo")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Phone")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Address")]),
+        _c("th", [_vm._v("Category Name")]),
         _vm._v(" "),
         _c("th", [_vm._v("Action")])
       ])

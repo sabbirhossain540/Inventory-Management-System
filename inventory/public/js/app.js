@@ -3746,6 +3746,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
   //Using Hook method as like construction method
   //User.loggedIn() Method comes from User Helper Class
@@ -3758,7 +3762,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   data: function data() {
     return {
-      employees: [],
+      products: [],
       searchTerm: ''
     };
   },
@@ -3766,18 +3770,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     filterSearch: function filterSearch() {
       var _this = this;
 
-      return this.employees.filter(function (employee) {
-        return employee.name.match(_this.searchTerm);
+      return this.products.filter(function (product) {
+        return product.name.match(_this.searchTerm);
       });
     }
   },
   methods: {
-    allEmployee: function allEmployee() {
+    allProduct: function allProduct() {
       var _this2 = this;
 
-      axios.get('/api/employee/').then(function (_ref) {
+      axios.get('/api/product/').then(function (_ref) {
         var data = _ref.data;
-        return _this2.employees = data;
+        return _this2.products = data;
       })["catch"]();
     },
     deleteEmployee: function deleteEmployee(id) {
@@ -3808,7 +3812,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }
 }, "created", function created() {
-  this.allEmployee();
+  this.allProduct();
 }));
 
 /***/ }),
@@ -50830,21 +50834,25 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "tbody",
-                  _vm._l(_vm.filterSearch, function(employee) {
-                    return _c("tr", { key: employee.id }, [
-                      _c("td", [_vm._v(_vm._s(employee.name))]),
+                  _vm._l(_vm.filterSearch, function(product) {
+                    return _c("tr", { key: product.id }, [
+                      _c("td", [_vm._v(_vm._s(product.product_name))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(product.product_code))]),
                       _vm._v(" "),
                       _c("td", [
                         _c("img", {
-                          attrs: { src: employee.photo, id: "em_photo" }
+                          attrs: { src: product.image, id: "em_photo" }
                         })
                       ]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(employee.phone))]),
+                      _c("td", [_vm._v(_vm._s(product.category_name))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(employee.salary))]),
+                      _c("td", [_vm._v(_vm._s(product.buying_price))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(employee.joining_date))]),
+                      _c("td", [_vm._v(_vm._s(product.selling_price))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(product.root))]),
                       _vm._v(" "),
                       _c(
                         "td",
@@ -50856,7 +50864,7 @@ var render = function() {
                               attrs: {
                                 to: {
                                   name: "edit-employee",
-                                  params: { id: employee.id }
+                                  params: { id: product.id }
                                 }
                               }
                             },
@@ -50870,7 +50878,7 @@ var render = function() {
                               staticStyle: { color: "white" },
                               on: {
                                 click: function($event) {
-                                  return _vm.deleteEmployee(employee.id)
+                                  return _vm.deleteProduct(product.id)
                                 }
                               }
                             },
@@ -50919,13 +50927,17 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("Name")]),
         _vm._v(" "),
+        _c("th", [_vm._v("Code")]),
+        _vm._v(" "),
         _c("th", [_vm._v("Photo")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Phone")]),
+        _c("th", [_vm._v("Category")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Sallery")]),
+        _c("th", [_vm._v("Buying Price")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Joining Date")]),
+        _c("th", [_vm._v("Selling Price")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Root")]),
         _vm._v(" "),
         _c("th", [_vm._v("Action")])
       ])

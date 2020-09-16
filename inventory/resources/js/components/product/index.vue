@@ -20,23 +20,27 @@
                     <thead class="thead-light">
                       <tr>
                         <th>Name</th>
+                        <th>Code</th>
                         <th>Photo</th>
-                        <th>Phone</th>
-                        <th>Sallery</th>
-                        <th>Joining Date</th>
+                        <th>Category</th>
+                        <th>Buying Price</th>
+                        <th>Selling Price</th>
+                        <th>Root</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="employee in filterSearch" :key="employee.id">
-                        <td>{{ employee.name }}</td>
-                        <td><img :src="employee.photo" id="em_photo"></td>
-                        <td>{{ employee.phone }}</td>
-                        <td>{{ employee.salary }}</td>
-                        <td>{{ employee.joining_date }}</td>
+                      <tr v-for="product in filterSearch" :key="product.id">
+                        <td>{{ product.product_name }}</td>
+                        <td>{{ product.product_code }}</td>
+                        <td><img :src="product.image" id="em_photo"></td>
+                        <td>{{ product.category_name }}</td>
+                        <td>{{ product.buying_price }}</td>
+                        <td>{{ product.selling_price }}</td>
+                        <td>{{ product.root }}</td>
                         <td>
-                        	<router-link :to="{ name: 'edit-employee', params: { id:employee.id }}" class="btn btn-sm btn-info" >Edit</router-link>
-                        	<a @click="deleteEmployee(employee.id)" class="btn btn-sm btn-danger" style="color: white;">Delete</a>
+                        	<router-link :to="{ name: 'edit-employee', params: { id:product.id }}" class="btn btn-sm btn-info" >Edit</router-link>
+                        	<a @click="deleteProduct(product.id)" class="btn btn-sm btn-danger" style="color: white;">Delete</a>
                         </td>
                       </tr>
                      
@@ -64,22 +68,22 @@
 
 		data(){
 			return {
-				employees: [],
+				products: [],
 				searchTerm: ''
 			}
 		},
 		computed:{
 			filterSearch(){
-				return this.employees.filter(employee => {
-					return employee.name.match(this.searchTerm)
+				return this.products.filter(product => {
+					return product.name.match(this.searchTerm)
 				})
 			}
 		},
 
 		methods:{
-			allEmployee(){
-				axios.get('/api/employee/')
-				.then(({data}) => (this.employees = data) )
+			allProduct(){
+				axios.get('/api/product/')
+				.then(({data}) => (this.products = data) )
 				.catch()
 			},
 
@@ -114,7 +118,7 @@
 		},
 
 		created(){
-			this.allEmployee();
+			this.allProduct();
 		}
 
 	}

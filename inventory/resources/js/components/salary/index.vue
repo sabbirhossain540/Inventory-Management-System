@@ -1,7 +1,7 @@
 <template>
 	    <div>
 	    	<div class="row mx-1">
-	    		<router-link to="/store-salary" class="btn btn-primary mb-3">Add Salary</router-link>
+	    		<router-link to="/store-employee" class="btn btn-primary mb-3">Add Employee</router-link>
 	    	</div>
 	    	<br>
 
@@ -13,34 +13,27 @@
               <!-- Simple Tables -->
               <div class="card">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Salary List</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Employee List</h6>
                 </div>
                 <div class="table-responsive">
                   <table class="table align-items-center table-flush">
                     <thead class="thead-light">
                       <tr>
                         <th>Name</th>
-                        <th>Code</th>
                         <th>Photo</th>
-                        <th>Category</th>
-                        <th>Buying Price</th>
-                        <th>Selling Price</th>
-                        <th>Root</th>
+                        <th>Phone</th>
+                        <th>Sallery</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="product in filterSearch" :key="product.id">
-                        <td>{{ product.product_name }}</td>
-                        <td>{{ product.product_code }}</td>
-                        <td><img :src="product.image" id="em_photo"></td>
-                        <td>{{ product.category_name }}</td>
-                        <td>{{ product.buying_price }}</td>
-                        <td>{{ product.selling_price }}</td>
-                        <td>{{ product.root }}</td>
+                      <tr v-for="employee in filterSearch" :key="employee.id">
+                        <td>{{ employee.name }}</td>
+                        <td><img :src="employee.photo" id="em_photo"></td>
+                        <td>{{ employee.phone }}</td>
+                        <td>{{ employee.salary }}</td>
                         <td>
-                        	<router-link :to="{ name: 'edit-product', params: { id:product.id }}" class="btn btn-sm btn-info" >Edit</router-link>
-                        	<a @click="deleteProduct(product.id)" class="btn btn-sm btn-danger" style="color: white;">Delete</a>
+                        	<router-link :to="{ name: 'pay-salary', params: { id:employee.id }}" class="btn btn-sm btn-info" >Pay Salary</router-link>
                         </td>
                       </tr>
                      
@@ -68,57 +61,28 @@
 
 		data(){
 			return {
-				products: [],
+				employees: [],
 				searchTerm: ''
 			}
 		},
 		computed:{
 			filterSearch(){
-				return this.products.filter(product => {
-					return product.product_name.match(this.searchTerm)
+				return this.employees.filter(employee => {
+					return employee.name.match(this.searchTerm)
 				})
 			}
 		},
 
 		methods:{
-			allProduct(){
-				axios.get('/api/product/')
-				.then(({data}) => (this.products = data) )
+			allEmployee(){
+				axios.get('/api/employee/')
+				.then(({data}) => (this.employees = data) )
 				.catch()
-			},
-
-			deleteProduct(id){
-				Swal.fire({
-				  title: 'Are you sure?',
-				  text: "You won't be able to revert this!",
-				  icon: 'warning',
-				  showCancelButton: true,
-				  confirmButtonColor: '#3085d6',
-				  cancelButtonColor: '#d33',
-				  confirmButtonText: 'Yes, delete it!'
-				}).then((result) => {
-				  if (result.isConfirmed) {
-				  	axios.delete('/api/product/'+id)
-				  	.then(() => {
-				  		this.products = this.products.filter(product => {
-				  			return product.id != id
-				  		})
-				  	})
-				  	.catch(() => {
-				  		this.$router.push({name: 'allProduct'})
-				  	})
-				    Swal.fire(
-				      'Deleted!',
-				      'Your file has been deleted.',
-				      'success'
-				    )
-				  }
-				})
 			}
 		},
 
 		created(){
-			this.allProduct();
+			this.allEmployee();
 		}
 
 	}

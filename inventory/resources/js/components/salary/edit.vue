@@ -59,7 +59,7 @@
 		                    </div>
 
 		                    <div class="form-group">
-		                      <button type="submit" class="btn btn-primary btn-block">Pay Now</button>
+		                      <button type="submit" class="btn btn-primary btn-block">Update</button>
 		                    </div>
 		                  </form>
 		                  <div class="text-center">

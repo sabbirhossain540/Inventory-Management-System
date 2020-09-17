@@ -1,7 +1,7 @@
 <template>
 	    <div>
 	    	<div class="row mx-1">
-	    		<router-link to="/salary" class="btn btn-primary mb-3">Pay Salary</router-link>
+	    		<router-link to="/salary" class="btn btn-primary mb-3">Go Back</router-link>
 	    	</div>
 	    	<br>
 
@@ -13,19 +13,26 @@
               <!-- Simple Tables -->
               <div class="card">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">All Salary Details</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Employee Salary Details</h6>
                 </div>
                 <div class="table-responsive">
                   <table class="table align-items-center table-flush">
                     <thead class="thead-light">
                       <tr>
-                        <th>Month Name</th>
-                        <th>Details</th>
+                        <th>Name</th>
+                        <th>Month</th>
+                        <th>Amount</th>
+                        <th>Dete</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr v-for="salary in filterSearch" :key="salary.id">
+                        <td>{{ salary.name }}</td>
                         <td>{{ salary.salary_month }}</td>
+                        <td>{{ salary.amount }}</td>
+                        <td>{{ salary.salary_date }}</td>
+
                         <td>
                         	<router-link :to="{ name: 'view-salary', params: { id:salary.salary_month }}" class="btn btn-sm btn-info" >View Salary</router-link>
                         </td>
@@ -69,7 +76,8 @@
 
 		methods:{
 			allSalary(){
-				axios.get('/api/salary/getAllSalary/')
+				let id = this.$route.params.id
+				axios.get('/api/salary/getMonthWiseSalary/'+id)
 				.then(({data}) => (this.salaries = data) )
 				.catch()
 			}

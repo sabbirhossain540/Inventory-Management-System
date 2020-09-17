@@ -1,7 +1,7 @@
 <template>
 	    <div>
 	    	<div class="row mx-1">
-	    		<router-link to="/allemployee" class="btn btn-primary">All Employee</router-link>
+	    		<router-link to="/salary" class="btn btn-primary">All Employee</router-link>
 	    	</div>
 		    <div class="row justify-content-center">
 		      <div class="col-xl-12 col-lg-12 col-md-12">
@@ -111,7 +111,7 @@
 				let id = this.$route.params.id
 				axios.post('/api/salary/paid/'+id,this.form)
 				.then(() => {
-					this.$router.push({ name: 'allSalary'})
+					this.$router.push({ name: 'salary'})
 					Notification.success();
 				})
 				.catch(error => this.errors = error.response.data.errors)

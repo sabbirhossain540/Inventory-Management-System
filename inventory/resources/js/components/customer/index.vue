@@ -69,7 +69,7 @@
 		computed:{
 			filterSearch(){
 				return this.customers.filter(customer => {
-					return customer.name.match(this.searchTerm)
+					return customer.name.match(this.searchTerm) || customer.phone.match(this.searchTerm) || customer.address.match(this.searchTerm)
 				})
 			}
 		},

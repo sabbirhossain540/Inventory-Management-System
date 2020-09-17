@@ -13,7 +13,7 @@
 		                  <div class="text-center">
 		                    <h1 class="h4 text-gray-900 mb-4">Pay Salary</h1>
 		                  </div>
-		                  <form class="user" @submit.prevent="employeeUpdate">
+		                  <form class="user" @submit.prevent="salaryPaid">
 
 		                    <div class="form-group">
 		                    	<div class="form-row">
@@ -52,8 +52,8 @@
 		                    		</div>
 		                    		<div class="col-md-6">
 		                    			<label>Amount</label>
-		                      			<input type="text" class="form-control" id="salary" v-model="form.salary">
-		                      			<small class="text-danger" v-if="errors.salary">{{ errors.salary[0] }}</small>
+		                      			<input type="text" class="form-control" id="amount" v-model="form.amount">
+		                      			<small class="text-danger" v-if="errors.amount">{{ errors.amount[0] }}</small>
 		                    		</div>
 		                    	</div>   
 		                    </div>
@@ -96,13 +96,8 @@
 				form:{
 					name: '',
 					email: '',
-					address: '',
-					salary: '',
-					joining_date: '',
-					nid: '',
-					phone: '',
-					photo: '',
-					newphoto: ''
+					salary_month: '',
+					amount: '',
 				},
 
 				errors :{
@@ -112,29 +107,14 @@
 		},
 
 		methods:{
-			employeeUpdate(){
+			salaryPaid(){
 				let id = this.$route.params.id
-				axios.patch('/api/employee/'+id,this.form)
+				axios.post('/api/salary/paid/'+id,this.form)
 				.then(() => {
-					this.$router.push({ name: 'allemployee'})
+					this.$router.push({ name: 'allSalary'})
 					Notification.success();
 				})
 				.catch(error => this.errors = error.response.data.errors)
-			},
-
-			//For Image Size Check Function
-			onFileSelected(event){
-				let file = event.target.files[0];
-				if(file.size > 1048770){
-					Notification.image_validation();
-				}else{
-					//For Instant Image Show
-					let reader = new FileReader();
-					reader.onload = event =>{
-						this.form.photo = event.target.result
-					};
-					reader.readAsDataURL(file)
-				}
 			}
 		}
 

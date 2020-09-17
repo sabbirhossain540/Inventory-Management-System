@@ -1,8 +1,8 @@
 <template>
 	    <div>
-	    	<div class="row mx-1">
+	    	<!-- <div class="row mx-1">
 	    		<router-link to="/store-employee" class="btn btn-primary mb-3">Add Employee</router-link>
-	    	</div>
+	    	</div> -->
 	    	<br>
 
 	    	<input type="text" v-model="searchTerm" class="form-control" placeholder="Search Here" style="width: 300px;">

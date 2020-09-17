@@ -1,7 +1,7 @@
 <template>
 	    <div>
 	    	<div class="row mx-1">
-	    		<router-link to="/allSalary" class="btn btn-primary">All Salary</router-link>
+	    		<router-link to="/allsalary" class="btn btn-primary">Go Back</router-link>
 	    	</div>
 		    <div class="row justify-content-center">
 		      <div class="col-xl-12 col-lg-12 col-md-12">
@@ -13,19 +13,19 @@
 		                  <div class="text-center">
 		                    <h1 class="h4 text-gray-900 mb-4">Update Salary</h1>
 		                  </div>
-		                  <form class="user" @submit.prevent="productEdit" enctype="multipart/form-data">
+		                  <form class="user" @submit.prevent="salaryUpdate">
 
 		                    <div class="form-group">
 		                    	<div class="form-row">
 		                    		<div class="col-md-6">
-		                    			<label>Product Name</label>
-		                      			<input type="text" class="form-control" id="product_name" v-model="form.product_name">
-		                      			<small class="text-danger" v-if="errors.product_name">{{ errors.product_name[0] }}</small>
+		                    			<label>Name</label>
+		                      			<input type="text" class="form-control" id="name" v-model="form.name">
+		                      			<small class="text-danger" v-if="errors.name">{{ errors.name[0] }}</small>
 		                    		</div>
 		                    		<div class="col-md-6">
-		                    			<label>Product Code</label>
-		                      			<input type="text" class="form-control" id="product_code" v-model="form.product_code">
-		                      			<small class="text-danger" v-if="errors.product_code">{{ errors.product_code[0] }}</small>
+		                    			<label>Email</label>
+		                      			<input type="email" class="form-control" id="email" v-model="form.email">
+		                      			<small class="text-danger" v-if="errors.email">{{ errors.email[0] }}</small>
 		                    		</div>
 		                    	</div>   
 		                    </div>
@@ -33,73 +33,33 @@
 		                    <div class="form-group">
 		                    	<div class="form-row">
 		                    		<div class="col-md-6">
-		                    			<label>Product Category</label>
-		                      			<select class="form-control" id="dfdf" v-model="form.category_id">
-		                      				<option :value="category.id" v-for="category in categories">{{ category.category_name }}</option>
+		                    			<label>Months</label>
+		                      			<select class="form-control" id="dfdf" v-model="form.salary_month">
+		                      				<option value="January">January</option>
+		                      				<option value="February">February</option>
+		                      				<option value="March">March</option>
+		                      				<option value="April">April</option>
+		                      				<option value="May">May</option>
+		                      				<option value="June">June</option>
+		                      				<option value="July">July</option>
+		                      				<option value="August">August</option>
+		                      				<option value="September">September</option>
+		                      				<option value="October">October</option>
+		                      				<option value="November">November</option>
+		                      				<option value="December">December</option>
 		                      			</select>
+		                      			<small class="text-danger" v-if="errors.salary_month">{{ errors.salary_month[0] }}</small>
 		                    		</div>
 		                    		<div class="col-md-6">
-		                      			<label>Product Supplier</label>
-		                      			<select class="form-control" id="supplier" v-model="form.supplier_id">
-		                      				<option :value="supplier.id" v-for="supplier in suppliers">{{ supplier.name }}</option>
-		                      			</select>
-		                    		</div>
-		                    	</div>   
-		                    </div>
-
-		                     <div class="form-group">
-		                    	<div class="form-row">
-		                    		<div class="col-md-4">
-		                    			<label>Product Root</label>
-		                      			<input type="text" class="form-control" id="root" v-model="form.root">
-		                      			<small class="text-danger" v-if="errors.root">{{ errors.root[0] }}</small>
-		                    		</div>
-		                    		<div class="col-md-4">
-		                    			<label>Buying Price</label>
-		                      			<input type="text" class="form-control" id="buying_price" v-model="form.buying_price">
-		                      			<small class="text-danger" v-if="errors.buying_price">{{ errors.buying_price[0] }}</small>
-		                    		</div>
-
-		                    		<div class="col-md-4">
-		                    			<label>Selling Price</label>
-		                      			<input type="text" class="form-control" id="selling_price" v-model="form.selling_price">
-		                      			<small class="text-danger" v-if="errors.selling_price">{{ errors.selling_price[0] }}</small>
+		                    			<label>Amount</label>
+		                      			<input type="text" class="form-control" id="amount" v-model="form.amount">
+		                      			<small class="text-danger" v-if="errors.amount">{{ errors.amount[0] }}</small>
 		                    		</div>
 		                    	</div>   
 		                    </div>
 
 		                    <div class="form-group">
-		                    	<div class="form-row">
-		                    		<div class="col-md-6">
-		                    			<label>Buying Date</label>
-		                      			<input type="date" class="form-control" id="buying_date" v-model="form.buying_date">
-		                      			<small class="text-danger" v-if="errors.buying_date">{{ errors.buying_date[0] }}</small>
-		                    		</div>
-		                    		<div class="col-md-6">
-		                    			<label>Product Quantity</label>
-		                      			<input type="text" class="form-control" id="product_quantity"  v-model="form.product_quantity">
-		                      			<small class="text-danger" v-if="errors.product_quantity">{{ errors.product_quantity[0] }}</small>
-		                    		</div>
-		                    	</div>   
-		                    </div>
-
-		                    <div class="form-group">
-		                    	<div class="form-row">
-		                    		<div class="col-md-6">
-		                      			<input type="file" class="custom-file-input" id="customeFile" @change="onFileSelected">
-		                      			<small class="text-danger" v-if="errors.image">{{ errors.image[0] }}</small>
-		                      			<label class="custom-file-label" for="customeFile">Choose file</label>
-		                    		</div>
-
-		                    		<div class="col-md-6">
-		                    			<img :src="form.image" height="40px" width="40px">
-		                    		</div>
-		                    	</div>   
-		                    </div>
-
-
-		                    <div class="form-group">
-		                      <button type="submit" class="btn btn-primary btn-block">Update</button>
+		                      <button type="submit" class="btn btn-primary btn-block">Pay Now</button>
 		                    </div>
 		                  </form>
 		                  <div class="text-center">
@@ -124,17 +84,9 @@
 				this.$router.push({name: '/'})
 			}
 
-			//Category Collection
-			axios.get('/api/category/')
-			.then(({data}) => (this.categories = data))
-
-			//Supplier Collection
-			axios.get('/api/supplier/')
-			.then(({data}) => (this.suppliers = data))
-
 			//Retrive Data for edit
 			let id = this.$route.params.id
-			axios.get('/api/product/'+id)
+			axios.get('/api/salary/getDataForEdit/'+id)
 			.then(({data}) => (this.form = data))
 			.catch(console.log(error))
 
@@ -146,52 +98,29 @@
 		data(){
 			return {
 				form:{
-					product_name: '',
-					product_code: '',
-					category_id: '',
-					root: '',
-					buying_price: '',
-					selling_price: '',
-					supplier_id: '',
-					buying_date: '',
-					product_quantity: '',
-					image: '',
-					newimage: ''
+					name: '',
+					email: '',
+					salary_month: '',
+					amount: '',
 				},
 
 				errors :{
 
-				},
-				categories:{},
-				suppliers:{},
+				}
 			}
 		},
 
 		methods:{
-			productEdit(){
+			salaryUpdate(){
 				let id = this.$route.params.id
-				axios.patch('/api/product/'+id,this.form)
+				axios.post('/api/salary/salaryUpdate/'+id,this.form)
 				.then(() => {
-					this.$router.push({ name: 'allProduct'})
+					this.$router.push({ name: 'allsalary'})
 					Notification.success();
 				})
 				.catch(error => this.errors = error.response.data.errors)
 			},
 
-			//For Image Size Check Function
-			onFileSelected(event){
-				let file = event.target.files[0];
-				if(file.size > 1048770){
-					Notification.image_validation();
-				}else{
-					//For Instant Image Show
-					let reader = new FileReader();
-					reader.onload = event =>{
-						this.form.newimage = event.target.result
-					};
-					reader.readAsDataURL(file)
-				}
-			}
 		}
 
 	}

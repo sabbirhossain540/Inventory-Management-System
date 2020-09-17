@@ -1,7 +1,7 @@
 <template>
 	    <div>
 	    	<div class="row mx-1">
-	    		<router-link to="/store-supplier" class="btn btn-primary mb-3">Add Customer</router-link>
+	    		<router-link to="/store-customer" class="btn btn-primary mb-3">Add Customer</router-link>
 	    	</div>
 	    	<br>
 
@@ -34,7 +34,7 @@
                         <td>{{ customer.address }}</td>
                         <td>
                         	<router-link :to="{ name: 'edit-customer', params: { id:customer.id }}" class="btn btn-sm btn-info" >Edit</router-link>
-                        	<a @click="deleteSupplier(customer.id)" class="btn btn-sm btn-danger" style="color: white;">Delete</a>
+                        	<a @click="deleteCustomer(customer.id)" class="btn btn-sm btn-danger" style="color: white;">Delete</a>
                         </td>
                       </tr>
                      
@@ -81,7 +81,7 @@
 				.catch()
 			},
 
-			deleteSupplier(id){
+			deleteCustomer(id){
 				Swal.fire({
 				  title: 'Are you sure?',
 				  text: "You won't be able to revert this!",
@@ -92,14 +92,14 @@
 				  confirmButtonText: 'Yes, delete it!'
 				}).then((result) => {
 				  if (result.isConfirmed) {
-				  	axios.delete('/api/supplier/'+id)
+				  	axios.delete('/api/customer/'+id)
 				  	.then(() => {
-				  		this.suppliers = this.suppliers.filter(supplier => {
-				  			return supplier.id != id
+				  		this.customers = this.customers.filter(customer => {
+				  			return customer.id != id
 				  		})
 				  	})
 				  	.catch(() => {
-				  		this.$router.push({name: 'allsupplier'})
+				  		this.$router.push({name: 'allcustomer'})
 				  	})
 				    Swal.fire(
 				      'Deleted!',

@@ -1,7 +1,7 @@
 <template>
 	    <div>
 	    	<div class="row mx-1">
-	    		<router-link to="/allsupplier" class="btn btn-primary">All Supplier</router-link>
+	    		<router-link to="/allcustomer" class="btn btn-primary">All Customer</router-link>
 	    	</div>
 		    <div class="row justify-content-center">
 		      <div class="col-xl-12 col-lg-12 col-md-12">
@@ -11,9 +11,9 @@
 		              <div class="col-lg-12">
 		                <div class="login-form">
 		                  <div class="text-center">
-		                    <h1 class="h4 text-gray-900 mb-4">Update Supplier</h1>
+		                    <h1 class="h4 text-gray-900 mb-4">Update Customer</h1>
 		                  </div>
-		                  <form class="user" @submit.prevent="supplierUpdate" enctype="multipart/form-data">
+		                  <form class="user" @submit.prevent="customerUpdate" enctype="multipart/form-data">
 
 		                    <div class="form-group">
 		                    	<div class="form-row">
@@ -37,15 +37,6 @@
 		                    		<div class="col-md-6">
 		                      			<input type="text" class="form-control" id="phone" placeholder="Enter your Phone no" v-model="form.phone">
 		                      			<small class="text-danger" v-if="errors.phone">{{ errors.phone[0] }}</small>
-		                    		</div>
-		                    	</div>   
-		                    </div>
-
-		                     <div class="form-group">
-		                    	<div class="form-row">
-		                    		<div class="col-md-6">
-		                      			<input type="text" class="form-control" id="shopname" placeholder="Enter your Shop name" v-model="form.shopname">
-		                      			<small class="text-danger" v-if="errors.shopname">{{ errors.shopname[0] }}</small>
 		                    		</div>
 		                    	</div>   
 		                    </div>
@@ -93,7 +84,7 @@
 
 			//Retrive Data for edit
 			let id = this.$route.params.id
-			axios.get('/api/supplier/'+id)
+			axios.get('/api/customer/'+id)
 			.then(({data}) => (this.form = data))
 			.catch(console.log(error))
 		},
@@ -105,7 +96,6 @@
 					email: '',
 					address: '',
 					phone: '',
-					shopname: '',
 					photo: '',
 					newphoto: ''
 				},
@@ -117,11 +107,11 @@
 		},
 
 		methods:{
-			supplierUpdate(){
+			customerUpdate(){
 				let id = this.$route.params.id
-				axios.patch('/api/supplier/'+id,this.form)
+				axios.patch('/api/customer/'+id,this.form)
 				.then(() => {
-					this.$router.push({ name: 'allsupplier'})
+					this.$router.push({ name: 'allcustomer'})
 					Notification.success();
 				})
 				.catch(error => this.errors = error.response.data.errors)

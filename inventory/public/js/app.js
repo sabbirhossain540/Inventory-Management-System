@@ -4309,7 +4309,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     //Cart Method Start Here
     AddToCart: function AddToCart(id) {
-      alert(id);
+      axios.get('/api/addToCart/' + id).then(function () {
+        Notification.cart_success();
+      })["catch"]();
     }
   }
 }, "created", function created() {
@@ -72792,6 +72794,16 @@ var Notification = /*#__PURE__*/function () {
         type: 'error',
         layout: 'topRight',
         text: 'Upload Image Less than 1 MB Size',
+        timeout: 1000
+      }).show();
+    }
+  }, {
+    key: "succcart_successess",
+    value: function succcart_successess() {
+      new Noty({
+        type: 'success',
+        layout: 'topRight',
+        text: 'Successfully Add to Cart',
         timeout: 1000
       }).show();
     }

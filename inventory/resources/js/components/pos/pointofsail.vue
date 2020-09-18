@@ -213,7 +213,11 @@
 
 			//Cart Method Start Here
 			AddToCart(id){
-				alert(id);
+				axios.get('/api/addToCart/'+id)
+				.then(() => {
+					Notification.cart_success()
+				} )
+				.catch()
 			}
 		},
 

@@ -30,3 +30,6 @@ Route::get('/salary/getDataForEdit/{id}', 'SalaryController@test');
 Route::post('/salary/salaryUpdate/{id}', 'SalaryController@salaryUpdate');
 
 Route::get('/getting/product/{id}', 'Api\PosController@GetProduct');
+
+//Add to cart Route
+Route::get('/addToCart/{id}', 'Api\CartController@addToCart');

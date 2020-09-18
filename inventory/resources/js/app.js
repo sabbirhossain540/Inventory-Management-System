@@ -39,6 +39,9 @@ window.Toast = Toast;
 
 //End Using Sweet alert part
 
+//Using for On Page Content Loading
+window.Reload = new Vue();
+
 
 const router = new VueRouter({
   routes, // short for `routes: routes`

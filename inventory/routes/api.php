@@ -31,5 +31,7 @@ Route::post('/salary/salaryUpdate/{id}', 'SalaryController@salaryUpdate');
 
 Route::get('/getting/product/{id}', 'Api\PosController@GetProduct');
 
-//Add to cart Route
+//Add to cart Routeget
 Route::get('/addToCart/{id}', 'Api\CartController@addToCart');
+Route::get('/getCartProduct', 'Api\CartController@CartProduct');
+Route::get('/remove/cart/{id}', 'Api\CartController@DeleteProductFromCart');

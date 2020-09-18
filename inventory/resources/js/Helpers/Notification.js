@@ -50,11 +50,20 @@ class Notification{
 	}
 
 
-	succcart_successess(){
+	cart_success(){
 		new Noty({
 		    type: 'success',
 		    layout : 'topRight',
 		    text: 'Successfully Add to Cart',
+		    timeout: 1000,
+		}).show();
+	}
+
+	cart_delete(){
+		new Noty({
+		    type: 'success',
+		    layout : 'topRight',
+		    text: 'Successfully deleted',
 		    timeout: 1000,
 		}).show();
 	}

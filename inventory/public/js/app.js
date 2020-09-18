@@ -4239,6 +4239,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
   //Using Hook method as like construction method
   //User.loggedIn() Method comes from User Helper Class
@@ -4255,7 +4260,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       categories: [],
       getproducts: [],
       searchTerm: '',
-      customers: []
+      customers: [],
+      carts: []
     };
   },
   computed: {
@@ -4310,14 +4316,35 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     //Cart Method Start Here
     AddToCart: function AddToCart(id) {
       axios.get('/api/addToCart/' + id).then(function () {
+        Reload.$emit('afterAdd');
         Notification.cart_success();
+      })["catch"]();
+    },
+    cartProduct: function cartProduct() {
+      var _this7 = this;
+
+      axios.get('/api/getCartProduct/').then(function (_ref5) {
+        var data = _ref5.data;
+        return _this7.carts = data;
+      })["catch"]();
+    },
+    removeItem: function removeItem(id) {
+      axios.get('/api/remove/cart/' + id).then(function () {
+        Reload.$emit('afterAdd');
+        Notification.cart_delete();
       })["catch"]();
     }
   }
 }, "created", function created() {
+  var _this8 = this;
+
   this.allProduct();
   this.allCategory();
   this.allCustomer();
+  this.cartProduct();
+  Reload.$on('afterAdd', function () {
+    _this8.cartProduct();
+  });
 }));
 
 /***/ }),
@@ -53381,7 +53408,82 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _vm._m(1),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "chart-area" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "table-responsive",
+                      staticStyle: { "font-size": "12px" }
+                    },
+                    [
+                      _c(
+                        "table",
+                        { staticClass: "table align-items-center table-flush" },
+                        [
+                          _vm._m(1),
+                          _vm._v(" "),
+                          _c(
+                            "tbody",
+                            _vm._l(_vm.carts, function(cart) {
+                              return _c("tr", { key: cart.id }, [
+                                _c("td", [_vm._v(_vm._s(cart.pro_name))]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("input", {
+                                    staticStyle: { width: "15px" },
+                                    attrs: { type: "text", readonly: "" },
+                                    domProps: { value: cart.pro_quantity }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "button",
+                                    { staticClass: "btn btn-sm btn-success" },
+                                    [_vm._v("+")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "button",
+                                    { staticClass: "btn btn-sm btn-danger" },
+                                    [_vm._v("-")]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(cart.product_price))]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(cart.sub_total))]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "btn btn-sm btn-primary",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.removeItem(cart.id)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "font",
+                                        { attrs: { color: "white;" } },
+                                        [_vm._v("X")]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ])
+                              ])
+                            }),
+                            0
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                ])
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "card-footer" }, [
                 _vm._m(2),
@@ -53868,61 +53970,17 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-body" }, [
-      _c("div", { staticClass: "chart-area" }, [
-        _c(
-          "div",
-          {
-            staticClass: "table-responsive",
-            staticStyle: { "font-size": "12px" }
-          },
-          [
-            _c(
-              "table",
-              { staticClass: "table align-items-center table-flush" },
-              [
-                _c("thead", { staticClass: "thead-light" }, [
-                  _c("tr", [
-                    _c("th", [_vm._v("Name")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Qty")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Unit")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Total")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Action")])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("tbody", [
-                  _c("tr", [
-                    _c("td", [
-                      _c("a", { attrs: { href: "#" } }, [_vm._v("Name")])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("3")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("4")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("3")]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-sm btn-primary",
-                          attrs: { href: "#" }
-                        },
-                        [_vm._v("X")]
-                      )
-                    ])
-                  ])
-                ])
-              ]
-            )
-          ]
-        )
+    return _c("thead", { staticClass: "thead-light" }, [
+      _c("tr", [
+        _c("th", [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Qty")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Unit")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Total")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Action")])
       ])
     ])
   },
@@ -72798,12 +72856,22 @@ var Notification = /*#__PURE__*/function () {
       }).show();
     }
   }, {
-    key: "succcart_successess",
-    value: function succcart_successess() {
+    key: "cart_success",
+    value: function cart_success() {
       new Noty({
         type: 'success',
         layout: 'topRight',
         text: 'Successfully Add to Cart',
+        timeout: 1000
+      }).show();
+    }
+  }, {
+    key: "cart_delete",
+    value: function cart_delete() {
+      new Noty({
+        type: 'success',
+        layout: 'topRight',
+        text: 'Successfully deleted',
         timeout: 1000
       }).show();
     }
@@ -72992,7 +73060,9 @@ var Toast = sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.mixin({
   }
 });
 window.Toast = Toast; //End Using Sweet alert part
+//Using for On Page Content Loading
 
+window.Reload = new vue__WEBPACK_IMPORTED_MODULE_0___default.a();
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: _routes__WEBPACK_IMPORTED_MODULE_2__["routes"],
   // short for `routes: routes`

@@ -32,12 +32,17 @@
 				                      </tr>
 				                    </thead>
 				                    <tbody>
-				                      <tr>
-				                        <td><a href="#">Name</a></td>
-				                        <td>3</td>
-				                        <td>4</td>
-				                        <td>3</td>
-				                        <td><a href="#" class="btn btn-sm btn-primary">X</a></td>
+				                      <tr v-for="cart in carts" :key="cart.id">
+				                        <td>{{ cart.pro_name }}</td>
+				                        <td>
+
+				                        	<input type="text" style="width: 15px;" readonly="" :value="cart.pro_quantity">
+				                        	<button class="btn btn-sm btn-success">+</button>
+				                        	<button class="btn btn-sm btn-danger">-</button>
+				                        </td>
+				                        <td>{{ cart.product_price }}</td>
+				                        <td>{{ cart.sub_total }}</td>
+				                        <td><a @click="removeItem(cart.id)" class="btn btn-sm btn-primary"><font color="white;">X</font></a></td>
 				                      </tr>
 				                     
 				                    </tbody>
@@ -173,7 +178,8 @@
 				categories: [],
 				getproducts: [],
 				searchTerm: '',
-				customers:[]
+				customers:[],
+				carts:[],
 			}
 		},
 		computed:{
@@ -215,7 +221,23 @@
 			AddToCart(id){
 				axios.get('/api/addToCart/'+id)
 				.then(() => {
+					Reload.$emit('afterAdd');
 					Notification.cart_success()
+				} )
+				.catch()
+			},
+
+			cartProduct(){
+				axios.get('/api/getCartProduct/')
+				.then(({data}) => (this.carts = data) )
+				.catch()
+			},
+
+			removeItem(id){
+				axios.get('/api/remove/cart/'+id)
+				.then(() => {
+					Reload.$emit('afterAdd');
+					Notification.cart_delete()
 				} )
 				.catch()
 			}
@@ -227,6 +249,10 @@
 			this.allProduct();
 			this.allCategory();
 			this.allCustomer();
+			this.cartProduct();
+			Reload.$on('afterAdd', () => {
+				this.cartProduct();
+			})
 		}
 
 	}

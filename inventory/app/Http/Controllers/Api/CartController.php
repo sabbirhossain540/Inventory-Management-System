@@ -19,4 +19,13 @@ class CartController extends Controller
 
     	DB::table('pos')->insert($data);
     }
+
+    public function CartProduct(){
+    	$data = DB::table('pos')->get();
+    	return response()->json($data);
+    }
+
+    public function DeleteProductFromCart($id){
+    	DB::table('pos')->where('id', $id)->delete();
+    }
 }

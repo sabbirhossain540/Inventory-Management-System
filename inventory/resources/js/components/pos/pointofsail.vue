@@ -37,8 +37,8 @@
 				                        <td>
 
 				                        	<input type="text" style="width: 15px;" readonly="" :value="cart.pro_quantity">
-				                        	<button class="btn btn-sm btn-success">+</button>
-				                        	<button class="btn btn-sm btn-danger">-</button>
+				                        	<button @click.prevent="increment(cart.id)" class="btn btn-sm btn-success">+</button>
+				                        	<button @click.prevent="decriment(cart.id)" class="btn btn-sm btn-danger">-</button>
 				                        </td>
 				                        <td>{{ cart.product_price }}</td>
 				                        <td>{{ cart.sub_total }}</td>
@@ -240,7 +240,27 @@
 					Notification.cart_delete()
 				} )
 				.catch()
+			},
+
+			increment(id){
+				axios.get('/api/incriment/'+id)
+				.then(() => {
+					Reload.$emit('afterAdd');
+					Notification.success()
+				} )
+				.catch()
+			},
+
+			decriment(id){
+				axios.get('/api/decriment/'+id)
+				.then(() => {
+					Reload.$emit('afterAdd');
+					Notification.success()
+				} )
+				.catch()
 			}
+
+
 		},
 
 

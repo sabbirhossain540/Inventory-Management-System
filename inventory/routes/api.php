@@ -35,3 +35,5 @@ Route::get('/getting/product/{id}', 'Api\PosController@GetProduct');
 Route::get('/addToCart/{id}', 'Api\CartController@addToCart');
 Route::get('/getCartProduct', 'Api\CartController@CartProduct');
 Route::get('/remove/cart/{id}', 'Api\CartController@DeleteProductFromCart');
+Route::get('/incriment/{id}', 'Api\CartController@incriment');
+Route::get('/decriment/{id}', 'Api\CartController@decriment');

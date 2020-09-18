@@ -4333,6 +4333,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         Reload.$emit('afterAdd');
         Notification.cart_delete();
       })["catch"]();
+    },
+    increment: function increment(id) {
+      axios.get('/api/incriment/' + id).then(function () {
+        Reload.$emit('afterAdd');
+        Notification.success();
+      })["catch"]();
+    },
+    decriment: function decriment(id) {
+      axios.get('/api/decriment/' + id).then(function () {
+        Reload.$emit('afterAdd');
+        Notification.success();
+      })["catch"]();
     }
   }
 }, "created", function created() {
@@ -53438,13 +53450,29 @@ var render = function() {
                                   _vm._v(" "),
                                   _c(
                                     "button",
-                                    { staticClass: "btn btn-sm btn-success" },
+                                    {
+                                      staticClass: "btn btn-sm btn-success",
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          return _vm.increment(cart.id)
+                                        }
+                                      }
+                                    },
                                     [_vm._v("+")]
                                   ),
                                   _vm._v(" "),
                                   _c(
                                     "button",
-                                    { staticClass: "btn btn-sm btn-danger" },
+                                    {
+                                      staticClass: "btn btn-sm btn-danger",
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          return _vm.decriment(cart.id)
+                                        }
+                                      }
+                                    },
                                     [_vm._v("-")]
                                   )
                                 ]),

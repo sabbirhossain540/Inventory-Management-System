@@ -38,7 +38,8 @@
 
 				                        	<input type="text" style="width: 15px;" readonly="" :value="cart.pro_quantity">
 				                        	<button @click.prevent="increment(cart.id)" class="btn btn-sm btn-success">+</button>
-				                        	<button @click.prevent="decriment(cart.id)" class="btn btn-sm btn-danger">-</button>
+				                        	<button @click.prevent="decriment(cart.id)" class="btn btn-sm btn-danger" v-if="cart.pro_quantity >= 2">-</button>
+				                        	<button class="btn btn-sm btn-danger" v-else="" disabled="">-</button>
 				                        </td>
 				                        <td>{{ cart.product_price }}</td>
 				                        <td>{{ cart.sub_total }}</td>

@@ -4244,6 +4244,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
   //Using Hook method as like construction method
   //User.loggedIn() Method comes from User Helper Class
@@ -53462,19 +53463,28 @@ var render = function() {
                                     [_vm._v("+")]
                                   ),
                                   _vm._v(" "),
-                                  _c(
-                                    "button",
-                                    {
-                                      staticClass: "btn btn-sm btn-danger",
-                                      on: {
-                                        click: function($event) {
-                                          $event.preventDefault()
-                                          return _vm.decriment(cart.id)
-                                        }
-                                      }
-                                    },
-                                    [_vm._v("-")]
-                                  )
+                                  cart.pro_quantity >= 2
+                                    ? _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-sm btn-danger",
+                                          on: {
+                                            click: function($event) {
+                                              $event.preventDefault()
+                                              return _vm.decriment(cart.id)
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("-")]
+                                      )
+                                    : _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-sm btn-danger",
+                                          attrs: { disabled: "" }
+                                        },
+                                        [_vm._v("-")]
+                                      )
                                 ]),
                                 _vm._v(" "),
                                 _c("td", [_vm._v(_vm._s(cart.product_price))]),

@@ -4239,7 +4239,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
   //Using Hook method as like construction method
   //User.loggedIn() Method comes from User Helper Class
@@ -4255,7 +4254,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       products: [],
       categories: [],
       getproducts: [],
-      searchTerm: ''
+      searchTerm: '',
+      customers: []
     };
   },
   computed: {
@@ -4298,11 +4298,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         var data = _ref3.data;
         return _this5.getproducts = data;
       })["catch"]();
+    },
+    allCustomer: function allCustomer() {
+      var _this6 = this;
+
+      axios.get('/api/customer/').then(function (_ref4) {
+        var data = _ref4.data;
+        return _this6.customers = data;
+      })["catch"]();
     }
   }
 }, "created", function created() {
   this.allProduct();
   this.allCategory();
+  this.allCustomer();
 }));
 
 /***/ }),
@@ -53404,11 +53413,10 @@ var render = function() {
                         }
                       }
                     },
-                    [
-                      _c("option", [_vm._v("1")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("3")])
-                    ]
+                    _vm._l(_vm.customers, function(customer) {
+                      return _c("option", [_vm._v(_vm._s(customer.name))])
+                    }),
+                    0
                   ),
                   _vm._v(" "),
                   _c("label", [_vm._v("Pay")]),

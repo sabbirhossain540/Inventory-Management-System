@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <link href="{{ asset('backend/img/logo/logo.png') }}" rel="icon">
-  <title>Admin Panel - Dashboard</title>
+  <title>6M Engineering and Power - Dashboard</title>
 
   <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
 
@@ -30,13 +30,19 @@
             <div class="sidebar-brand-icon">
               <img src="{{ asset('backend/img/logo/logo2.png') }}">
             </div>
-            <div class="sidebar-brand-text mx-3">RuangAdmin</div>
+            <div class="sidebar-brand-text mx-3"><marquee>6M Engineering And Power</marquee></div>
           </a>
           <hr class="sidebar-divider my-0">
           <li class="nav-item active">
             <router-link class="nav-link" to="/home">
               <i class="fas fa-fw fa-tachometer-alt"></i>
               <span>Dashboard</span></router-link>
+          </li>
+
+          <li class="nav-item bg-info">
+            <router-link class="nav-link" to="/pos">
+              <i class="fa fa-cart-plus" aria-hidden="true"></i>
+              <span>POS</span></router-link>
           </li>
           <hr class="sidebar-divider">
           <div class="sidebar-heading">
@@ -70,6 +76,20 @@
             </div>
           </li>
 
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#cusCol"
+              aria-expanded="true" aria-controls="cusCol">
+              <i class="fa fa-users" aria-hidden="true"></i>
+              <span>Customer</span>
+            </a>
+            <div id="cusCol" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <router-link class="collapse-item" to="/store-customer">Add Customer</router-link>
+                <router-link class="collapse-item" to="/allcustomer">All Customer</router-link>
+              </div>
+            </div>
+          </li>
+
 
            <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#catCol"
@@ -89,7 +109,8 @@
           <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#proCol"
               aria-expanded="true" aria-controls="proCol">
-              <i class="fa fa-cart-plus" aria-hidden="true"></i>
+              
+              <i class="fab fa-product-hunt"></i>
               <span>Product</span>
             </a>
             <div id="proCol" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
@@ -115,6 +136,45 @@
           </li>
 
 
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#salCol"
+              aria-expanded="true" aria-controls="salCol">
+              <i class="far fa-fw fa-window-maximize"></i>
+              <span>Salary</span>
+            </a>
+            <div id="salCol" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <router-link class="collapse-item" to="/salary">Add Salary</router-link>
+                <router-link class="collapse-item" to="/allsalary">All Salary</router-link>
+              </div>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <router-link class="nav-link" to="/stock">
+              <i class="fas fa-fw fa-chart-area"></i>
+              <span>Stock</span>
+            </a>
+          </router-link>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="true"
+              aria-controls="collapseTable">
+              <i class="fas fa-fw fa-table"></i>
+              <span>Reports</span>
+            </a>
+            <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="simple-tables.html">Reports 1</a>
+                <a class="collapse-item" href="datatables.html">Reports 1</a>
+              </div>
+            </div>
+          </li>
+
+
+
+<!-- 
           <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm" aria-expanded="true"
               aria-controls="collapseForm">
@@ -174,8 +234,8 @@
               <i class="fas fa-fw fa-chart-area"></i>
               <span>Charts</span>
             </a>
-          </li>
-          <hr class="sidebar-divider">
+          </li> -->
+          <!-- <hr class="sidebar-divider"> -->
           <div class="version" id="version-ruangadmin"></div>
         </ul>
       </nav>

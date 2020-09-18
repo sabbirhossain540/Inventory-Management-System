@@ -104,7 +104,7 @@
 				                	<input type="text" v-model="searchTerm" class="form-control mb-2" placeholder="Search Here" >
 				                	<div class="row">
 				                 		<div class="col-lg-3 col-md-3 col-sm-6 col-6" v-for="product in filterSearch" :key="product.id">
-				                 				<a href="#">
+				                 				<button class="btn btn-sm" @click.prevent="AddToCart(product.id)">
 					                 				<div class="card mb-3" style="width: 8.5rem">
 					                 					<img :src="product.image" id="em_photo" class="card-img-top">
 					                 					<div class="card-body">
@@ -113,7 +113,7 @@
 			                        <span class="badge badge-danger" v-else=" ">Stock Out</span>
 					                 					</div>
 					                 				</div>
-				                 				</a>
+				                 				</button>
 				                 			</div>
 				                 		</div>
 				                </div>
@@ -210,6 +210,11 @@
 				.then(({data}) => (this.customers = data) )
 				.catch()
 			},
+
+			//Cart Method Start Here
+			AddToCart(id){
+				alert(id);
+			}
 		},
 
 

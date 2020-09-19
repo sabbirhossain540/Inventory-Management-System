@@ -4222,6 +4222,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   //Using Hook method as like construction method
   //User.loggedIn() Method comes from User Helper Class
@@ -4234,20 +4275,18 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      form: {
-        date: '',
-        orders: []
-      }
+      search_date: '',
+      orders: {}
     };
   },
   methods: {
     searchByDate: function searchByDate() {
       var _this = this;
 
-      var data = {
-        date: this.date
+      var datas = {
+        date: this.search_date
       };
-      axios.get('/api/order/searchByDate/', data).then(function (_ref) {
+      axios.post('/api/search/order/', datas).then(function (_ref) {
         var data = _ref.data;
         return _this.orders = data;
       })["catch"](console.log(error));
@@ -54013,19 +54052,19 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.date,
-                                  expression: "date"
+                                  value: _vm.search_date,
+                                  expression: "search_date"
                                 }
                               ],
                               staticClass: "form-control",
                               attrs: { type: "date", id: "date", required: "" },
-                              domProps: { value: _vm.date },
+                              domProps: { value: _vm.search_date },
                               on: {
                                 input: function($event) {
                                   if ($event.target.composing) {
                                     return
                                   }
-                                  _vm.date = $event.target.value
+                                  _vm.search_date = $event.target.value
                                 }
                               }
                             })
@@ -54041,6 +54080,46 @@ var render = function() {
                 ])
               ])
             ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-lg-12" }, [
+          _c("div", { staticClass: "card" }, [
+            _vm._m(2),
+            _vm._v(" "),
+            _c("div", { staticClass: "table-responsive" }, [
+              _c(
+                "table",
+                { staticClass: "table align-items-center table-flush" },
+                [
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.orders, function(order) {
+                      return _c("tr", [
+                        _c("td", [_vm._v(_vm._s(order.name))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(order.qty))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(order.sub_total))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(order.vat))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(order.total))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(order.pay))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(order.due))])
+                      ])
+                    }),
+                    0
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-footer" })
           ])
         ])
       ])
@@ -54068,6 +54147,45 @@ var staticRenderFns = [
         { staticClass: "btn btn-primary btn-block", attrs: { type: "submit" } },
         [_vm._v("Search")]
       )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "card-header py-3 d-flex flex-row align-items-center justify-content-between"
+      },
+      [
+        _c("h6", { staticClass: "m-0 font-weight-bold text-primary" }, [
+          _vm._v("Product Details")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-light" }, [
+      _c("tr", [
+        _c("th", [_vm._v("Product Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Qty")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Subtotal")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Vat")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Total")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Pay")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Due")])
+      ])
     ])
   }
 ]

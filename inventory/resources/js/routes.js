@@ -50,6 +50,11 @@ let editStock = require('./components/product/editStock.vue').default;
 //Pos Route
 let pos = require('./components/pos/pointofsail.vue').default;
 
+//Order
+let order = require('./components/order/order.vue').default;
+
+
+
 
 export const routes = [
   { path: '/', component: login, name: '/' },
@@ -99,6 +104,9 @@ export const routes = [
 
   //Pos Path
   { path: '/pos', component: pos, name:'pos' },
+
+  //Order Path
+  { path: '/order', component: order, name:'order' },
 
 
 

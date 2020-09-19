@@ -42,3 +42,6 @@ Route::get('/decriment/{id}', 'Api\CartController@decriment');
 Route::get('/vats', 'Api\CartController@getVat');
 Route::post('/confirmorder', 'Api\CartController@ConfirmOrder');
 
+//Order Route
+Route::get('/orders', 'Api\OrderController@GetTodaysOrder');
+

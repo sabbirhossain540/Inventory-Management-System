@@ -298,7 +298,7 @@
 
 				axios.post('/api/confirmorder/',data)
 				.then(() => {
-					this.$router.push({ name: 'home'})
+					this.$router.push({ name: 'order'})
 					Notification.success();
 				})
 			

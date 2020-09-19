@@ -74,7 +74,7 @@ class CartController extends Controller
     public function ConfirmOrder(Request $request){
        $validateData = $request->validate([
             'customer_id' => 'required',
-            'payby' => 'required',
+            'pay_by' => 'required',
        ]);
 
        $data = array();
@@ -104,7 +104,16 @@ class CartController extends Controller
         $odata['sub_total'] = $row->sub_total;
 
         DB::table('order_details')->insert($odata);
+
+        //For Reduce Qty from Product Table
+        DB::table('products')
+            ->where('id',$row->pro_id)
+            ->update(['product_quantity' => DB::raw('product_quantity - '.$row->pro_quantity)]);
        }
+
+       //Delete Pos Table Data
+       DB::table('pos')->delete();
+       return response('Success');
 
     }
 }

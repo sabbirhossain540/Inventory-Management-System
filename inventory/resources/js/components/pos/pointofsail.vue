@@ -54,10 +54,10 @@
 		                </div>
 		                <div class="card-footer">
 		                	<ul class="list-group">
-		                		<li class="list-group-item d-flex justify-content-between align-items-center">Total Quantity: <strong>540</strong></li>
-		                		<li class="list-group-item d-flex justify-content-between align-items-center">Sub Total: <strong>5210</strong></li>
-		                		<li class="list-group-item d-flex justify-content-between align-items-center">Vat: <strong>15%</strong></li>
-		                		<li class="list-group-item d-flex justify-content-between align-items-center">Total: <strong>2412$</strong></li>
+		                		<li class="list-group-item d-flex justify-content-between align-items-center">Total Quantity: <strong>{{ qty }}</strong></li>
+		                		<li class="list-group-item d-flex justify-content-between align-items-center">Sub Total: <strong>{{ subTotal }}</strong></li>
+		                		<li class="list-group-item d-flex justify-content-between align-items-center">Vat: <strong>{{ vats.vat }}%</strong></li>
+		                		<li class="list-group-item d-flex justify-content-between align-items-center">Total: <strong>{{ subTotal*vats.vat / 100 + subTotal }} </strong></li>
 
 		                	</ul>
 		                	<br>
@@ -181,6 +181,7 @@
 				searchTerm: '',
 				customers:[],
 				carts:[],
+				vats:'',
 			}
 		},
 		computed:{
@@ -193,7 +194,25 @@
 				return this.getproducts.filter(getproduct => {
 					return getproduct.product_name.match(this.searchTerm)
 				})
-			}
+			},
+
+			qty(){
+				let sum = 0;
+				for(let i=0; i< this.carts.length; i++){
+					sum += (parseFloat(this.carts[i].pro_quantity));
+				}
+				return sum;
+			},
+
+			subTotal(){
+				let sum = 0;
+				for(let i=0; i< this.carts.length; i++){
+					sum += (parseFloat(this.carts[i].pro_quantity) * parseFloat(this.carts[i].product_price));
+				}
+				return sum;
+			},
+
+
 		},
 
 		methods:{
@@ -259,6 +278,12 @@
 					Notification.success()
 				} )
 				.catch()
+			},
+
+			getVat(){
+				axios.get('/api/vats/')
+				.then(({data}) => (this.vats = data) )
+				.catch()
 			}
 
 
@@ -271,9 +296,11 @@
 			this.allCategory();
 			this.allCustomer();
 			this.cartProduct();
+			
 			Reload.$on('afterAdd', () => {
 				this.cartProduct();
-			})
+			});
+			this.getVat();
 		}
 
 	}

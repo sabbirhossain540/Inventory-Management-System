@@ -37,3 +37,6 @@ Route::get('/getCartProduct', 'Api\CartController@CartProduct');
 Route::get('/remove/cart/{id}', 'Api\CartController@DeleteProductFromCart');
 Route::get('/incriment/{id}', 'Api\CartController@incriment');
 Route::get('/decriment/{id}', 'Api\CartController@decriment');
+
+//Vat route 
+Route::get('/vats', 'Api\CartController@getVat');

@@ -4262,7 +4262,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       getproducts: [],
       searchTerm: '',
       customers: [],
-      carts: []
+      carts: [],
+      vats: ''
     };
   },
   computed: {
@@ -4279,6 +4280,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.getproducts.filter(function (getproduct) {
         return getproduct.product_name.match(_this2.searchTerm);
       });
+    },
+    qty: function qty() {
+      var sum = 0;
+
+      for (var i = 0; i < this.carts.length; i++) {
+        sum += parseFloat(this.carts[i].pro_quantity);
+      }
+
+      return sum;
+    },
+    subTotal: function subTotal() {
+      var sum = 0;
+
+      for (var i = 0; i < this.carts.length; i++) {
+        sum += parseFloat(this.carts[i].pro_quantity) * parseFloat(this.carts[i].product_price);
+      }
+
+      return sum;
     }
   },
   methods: {
@@ -4346,18 +4365,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         Reload.$emit('afterAdd');
         Notification.success();
       })["catch"]();
+    },
+    getVat: function getVat() {
+      var _this8 = this;
+
+      axios.get('/api/vats/').then(function (_ref6) {
+        var data = _ref6.data;
+        return _this8.vats = data;
+      })["catch"]();
     }
   }
 }, "created", function created() {
-  var _this8 = this;
+  var _this9 = this;
 
   this.allProduct();
   this.allCategory();
   this.allCustomer();
   this.cartProduct();
   Reload.$on('afterAdd', function () {
-    _this8.cartProduct();
+    _this9.cartProduct();
   });
+  this.getVat();
 }));
 
 /***/ }),
@@ -53524,7 +53552,61 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "card-footer" }, [
-                _vm._m(2),
+                _c("ul", { staticClass: "list-group" }, [
+                  _c(
+                    "li",
+                    {
+                      staticClass:
+                        "list-group-item d-flex justify-content-between align-items-center"
+                    },
+                    [
+                      _vm._v("Total Quantity: "),
+                      _c("strong", [_vm._v(_vm._s(_vm.qty))])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    {
+                      staticClass:
+                        "list-group-item d-flex justify-content-between align-items-center"
+                    },
+                    [
+                      _vm._v("Sub Total: "),
+                      _c("strong", [_vm._v(_vm._s(_vm.subTotal))])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    {
+                      staticClass:
+                        "list-group-item d-flex justify-content-between align-items-center"
+                    },
+                    [
+                      _vm._v("Vat: "),
+                      _c("strong", [_vm._v(_vm._s(_vm.vats.vat) + "%")])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    {
+                      staticClass:
+                        "list-group-item d-flex justify-content-between align-items-center"
+                    },
+                    [
+                      _vm._v("Total: "),
+                      _c("strong", [
+                        _vm._v(
+                          _vm._s(
+                            (_vm.subTotal * _vm.vats.vat) / 100 + _vm.subTotal
+                          ) + " "
+                        )
+                      ])
+                    ]
+                  )
+                ]),
                 _vm._v(" "),
                 _c("br"),
                 _vm._v(" "),
@@ -53675,7 +53757,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "col-xl-7 col-lg-7" }, [
             _c("div", { staticClass: "card mb-4" }, [
-              _vm._m(3),
+              _vm._m(2),
               _vm._v(" "),
               _c(
                 "ul",
@@ -53684,7 +53766,7 @@ var render = function() {
                   attrs: { id: "myTab", role: "tablist" }
                 },
                 [
-                  _vm._m(4),
+                  _vm._m(3),
                   _vm._v(" "),
                   _vm._l(_vm.categories, function(category) {
                     return _c(
@@ -54020,48 +54102,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Action")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("ul", { staticClass: "list-group" }, [
-      _c(
-        "li",
-        {
-          staticClass:
-            "list-group-item d-flex justify-content-between align-items-center"
-        },
-        [_vm._v("Total Quantity: "), _c("strong", [_vm._v("540")])]
-      ),
-      _vm._v(" "),
-      _c(
-        "li",
-        {
-          staticClass:
-            "list-group-item d-flex justify-content-between align-items-center"
-        },
-        [_vm._v("Sub Total: "), _c("strong", [_vm._v("5210")])]
-      ),
-      _vm._v(" "),
-      _c(
-        "li",
-        {
-          staticClass:
-            "list-group-item d-flex justify-content-between align-items-center"
-        },
-        [_vm._v("Vat: "), _c("strong", [_vm._v("15%")])]
-      ),
-      _vm._v(" "),
-      _c(
-        "li",
-        {
-          staticClass:
-            "list-group-item d-flex justify-content-between align-items-center"
-        },
-        [_vm._v("Total: "), _c("strong", [_vm._v("2412$")])]
-      )
     ])
   },
   function() {

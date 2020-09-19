@@ -72,6 +72,39 @@ class CartController extends Controller
 
 
     public function ConfirmOrder(Request $request){
-        return response("Ok");
+       $validateData = $request->validate([
+            'customer_id' => 'required',
+            'payby' => 'required',
+       ]);
+
+       $data = array();
+       $data['customer_id'] = $request->customer_id;
+       $data['qty'] = $request->qty;
+       $data['sub_total'] = $request->subtotal;
+       $data['vat'] = $request->vat;
+       $data['total'] = $request->total;
+       $data['pay'] = $request->pay;
+       $data['due'] = $request->due;
+       $data['payby'] = $request->pay_by;
+       $data['order_date'] = date('d/m/Y');
+       $data['order_month'] = date('F');
+       $data['order_year'] = date('Y');
+
+       $order_id = DB::table('orders')->insertGetId($data);
+
+       $getPosDetails = DB::table('pos')->get();
+
+       $odata = array();
+
+       foreach($getPosDetails as $row){
+        $odata['order_id'] = $order_id;
+        $odata['product_id'] = $row->pro_id;
+        $odata['pro_quantity'] = $row->pro_quantity;
+        $odata['pro_price'] = $row->product_price;
+        $odata['sub_total'] = $row->sub_total;
+
+        DB::table('order_details')->insert($odata);
+       }
+
     }
 }

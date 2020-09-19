@@ -50,5 +50,16 @@ class PosController extends Controller
         return response()->json($due);
     }
 
+    public function TodayExpense(){
+        $date = date('d/m/Y');
+        $expense = DB::table('expenses')->where('expanse_date',$date)->sum('amount');
+        return response()->json($expense);
+    }
+
+    public function TodayStockOut(){
+        $product = DB::table('products')->where('product_quantity','<','1')->get();
+        return response()->json($product);
+    }
+
     
 }

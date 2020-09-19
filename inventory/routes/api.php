@@ -53,5 +53,7 @@ Route::Post('/search/order','Api\PosController@SearchOrderDate');
 Route::get('/today/sell','Api\PosController@TodaySell');
 Route::get('/today/income','Api\PosController@TodayIncome');
 Route::get('/today/due','Api\PosController@TodayDue');
+Route::get('/today/expense','Api\PosController@TodayExpense');
+Route::get('/today/stockout','Api\PosController@TodayStockOut');
 
 

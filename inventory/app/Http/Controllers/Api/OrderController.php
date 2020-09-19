@@ -39,4 +39,10 @@ class OrderController extends Controller
 
     	return response()->json($details);
     }
+
+
+    public function searchByDate(Request $request){
+    	$orderDate = $request->date;dvsvdsv
+    	return response()->json($orderDate);
+    }
 }

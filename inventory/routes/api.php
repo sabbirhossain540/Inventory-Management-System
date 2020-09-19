@@ -49,3 +49,9 @@ Route::get('/order/orderdetails/{id}', 'Api\OrderController@OrderDetailsAll');
 
 Route::Post('/search/order','Api\PosController@SearchOrderDate');
 
+//Admin Dashboard Route
+Route::get('/today/sell','Api\PosController@TodaySell');
+Route::get('/today/income','Api\PosController@TodayIncome');
+Route::get('/today/due','Api\PosController@TodayDue');
+
+

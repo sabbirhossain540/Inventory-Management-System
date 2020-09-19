@@ -31,7 +31,7 @@
                         <td>{{ order.due }}</td>
                         <td>{{ order.payby }}</td>
                         <td>
-                        	<router-link :to="{ name: 'edit-expense', params: { id:order.id }}" class="btn btn-sm btn-info" >View Order</router-link>
+                        	<router-link :to="{ name: 'viewOrder', params: { id:order.id }}" class="btn btn-sm btn-info" >View Order</router-link>
                         </td>
                       </tr>
                      

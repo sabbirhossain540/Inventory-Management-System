@@ -44,4 +44,6 @@ Route::post('/confirmorder', 'Api\CartController@ConfirmOrder');
 
 //Order Route
 Route::get('/orders', 'Api\OrderController@GetTodaysOrder');
+Route::get('/order/details/{id}', 'Api\OrderController@OrderDetails');
+Route::get('/order/orderdetails/{id}', 'Api\OrderController@OrderDetailsAll');
 

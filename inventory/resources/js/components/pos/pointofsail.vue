@@ -61,10 +61,10 @@
 
 		                	</ul>
 		                	<br>
-		                	<form>
+		                	<form @submit.prevent="ConfirmOrder">
 		                		<label>Customer Name</label>
 		                		<select class="form-control" v-model="customer_id">
-		                			<option v-for="customer in customers">{{ customer.name }}</option>
+		                			<option :value="customer.id" v-for="customer in customers">{{ customer.name }}</option>
 		                		</select>
 
 		                		<label>Pay</label>
@@ -175,6 +175,12 @@
 
 		data(){
 			return {
+
+				customer_id: '',
+				pay: '',
+				due: '',
+				pay_by: '',
+
 				products: [],
 				categories: [],
 				getproducts: [],
@@ -284,6 +290,18 @@
 				axios.get('/api/vats/')
 				.then(({data}) => (this.vats = data) )
 				.catch()
+			},
+
+			ConfirmOrder(){
+				let total = this.subTotal*this.vats.vat / 100 + this.subTotal;
+				var data = {qty:this.qty, subtotal:this.subTotal, customer_id:this.customer_id, pay_by:this.pay_by, pay:this.pay, due:this.due, vat:this.vats.vat, total:total }
+
+				axios.post('/api/confirmorder/',data)
+				.then(() => {
+					this.$router.push({ name: 'home'})
+					Notification.success();
+				})
+			
 			}
 
 

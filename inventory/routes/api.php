@@ -40,3 +40,5 @@ Route::get('/decriment/{id}', 'Api\CartController@decriment');
 
 //Vat route 
 Route::get('/vats', 'Api\CartController@getVat');
+Route::post('/confirmorder', 'Api\CartController@ConfirmOrder');
+

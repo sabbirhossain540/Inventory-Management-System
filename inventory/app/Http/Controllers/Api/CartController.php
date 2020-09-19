@@ -63,8 +63,15 @@ class CartController extends Controller
         return response('done');
     }
 
+
+
     public function getVat(){
         $vat = DB::table('extra')->first();
         return response()->json($vat);
+    }
+
+
+    public function ConfirmOrder(Request $request){
+        return response("Ok");
     }
 }

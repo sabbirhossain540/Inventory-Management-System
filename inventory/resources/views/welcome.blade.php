@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link href="{{ asset('backend/img/logo/logo.png') }}" rel="icon">
+  <link href="{{ asset('backend/img/logo/6mlogo.jpg') }}" rel="icon">
   <title>6M Engineering and Power - Dashboard</title>
 
   <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
@@ -28,7 +28,7 @@
         <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
           <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
             <div class="sidebar-brand-icon">
-              <img src="{{ asset('backend/img/logo/logo2.png') }}">
+              <img src="{{ asset('backend/img/logo/6mlogo.jpg') }}">
             </div>
             <div class="sidebar-brand-text mx-3"><marquee>6M Engineering And Power</marquee></div>
           </a>
